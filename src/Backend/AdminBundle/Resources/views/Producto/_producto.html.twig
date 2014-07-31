@@ -1,0 +1,55 @@
+<div class="control-group">
+{{ form_label(form.imei,"Imei", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.imei, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_producto_imei_errorloc' class="help-inline error" >{{ form_errors(form.imei) }}</div>
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(form.msn,"MSN", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.msn, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_producto_descripcion_errorloc' class="help-inline error" >{{ form_errors(form.msn) }}</div>
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.modelo,"Modelo", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.modelo, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+<div id='backend_adminbundle_producto_modelo_errorloc' class="help-inline error" >{{ form_errors(form.modelo) }}</div>  
+</div>
+</div> 
+
+<div class="control-group">
+
+{{ form_label(form.sucursal,"Sucursal", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.sucursal, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+<div id='backend_adminbundle_producto_sucursal_errorloc' class="help-inline error" >{{ form_errors(form.sucursal) }}</div>  
+</div>
+</div> 
+
+<div class="control-group">
+
+{{ form_label(form.origen,"Origen", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.origen, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+<div id='backend_adminbundle_producto_origen_errorloc' class="help-inline error" >{{ form_errors(form.origen) }}</div>  
+</div>
+</div> 
+
+
+
+<div class="control-group">
+{{ form_label(form.isAvailable,"Disponible", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.isAvailable, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_producto_isAvailable_errorloc' class="help-inline error" >{{ form_errors(form.isAvailable) }}</div>
+</div>
+</div>

@@ -1,0 +1,30 @@
+centro_new:
+    pattern:  /new
+    defaults: { _controller: "BackendAdminBundle:Centro:new" }
+
+centro_exportar:
+    pattern:  /exportar
+    defaults: { _controller: "BackendAdminBundle:Centro:exportar" }
+    
+centro_create:
+    pattern:  /create
+    defaults: { _controller: "BackendAdminBundle:Centro:create" }
+    requirements: { _method: post }
+
+centro_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendAdminBundle:Centro:edit" }
+
+centro_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendAdminBundle:Centro:update" }
+    requirements: { _method: post|put }
+
+centro_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendAdminBundle:Centro:delete" }
+    requirements: { _method: post|delete }
+
+centro:
+    pattern:  /{search}
+    defaults: { _controller: "BackendAdminBundle:Centro:index" , search: ''}

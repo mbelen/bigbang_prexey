@@ -99,7 +99,7 @@ class Centro
      */
     public function __construct()
     {
-        $this->areas = new ArrayCollection();
+        $this->sucursales = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
@@ -399,7 +399,7 @@ class Centro
      */
     public function removeSucursal(\Backend\AdminBundle\Entity\Sucursal $sucursales)
     {
-        $this->areas->removeElement($sucursales);
+        $this->sucursales->removeElement($sucursales);
     }
 
     /**
@@ -433,5 +433,28 @@ class Centro
     public function getIsDelete()
     {
         return $this->isDelete;
+    }
+
+    /**
+     * Add sucursales
+     *
+     * @param \Backend\AdminBundle\Entity\Sucursal $sucursales
+     * @return Centro
+     */
+    public function addSucursale(\Backend\AdminBundle\Entity\Sucursal $sucursales)
+    {
+        $this->sucursales[] = $sucursales;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sucursales
+     *
+     * @param \Backend\AdminBundle\Entity\Sucursal $sucursales
+     */
+    public function removeSucursale(\Backend\AdminBundle\Entity\Sucursal $sucursales)
+    {
+        $this->sucursales->removeElement($sucursales);
     }
 }
