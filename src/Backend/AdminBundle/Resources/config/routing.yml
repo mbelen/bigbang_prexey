@@ -53,3 +53,15 @@ backend_articulo:
 backend_tipo_orden_ingreso:
     resource: "@BackendAdminBundle/Resources/config/routing/tipo_ordeningreso.yml"
     prefix:   /tipo_ordeningreso
+    
+backend_centro:
+    resource: "@BackendAdminBundle/Resources/config/routing/centro.yml"
+    prefix:   /centro
+    
+backend_producto:
+    resource: "@BackendAdminBundle/Resources/config/routing/producto.yml"
+    prefix:   /producto
+    
+backend_canje:
+    resource: "@BackendAdminBundle/Resources/config/routing/canje.yml"
+    prefix:   /canje
