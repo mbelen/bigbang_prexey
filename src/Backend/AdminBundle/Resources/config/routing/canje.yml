@@ -1,0 +1,30 @@
+canje_new:
+    pattern:  /new
+    defaults: { _controller: "BackendAdminBundle:Canje:new" }
+
+canje_exportar:
+    pattern:  /exportar
+    defaults: { _controller: "BackendAdminBundle:Canje:exportar" }
+    
+canje_create:
+    pattern:  /create
+    defaults: { _controller: "BackendAdminBundle:Canje:create" }
+    requirements: { _method: post }
+
+canje_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendAdminBundle:Canje:edit" }
+
+canje_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendAdminBundle:Canje:update" }
+    requirements: { _method: post|put }
+
+canje_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendAdminBundle:Canje:delete" }
+    requirements: { _method: post|delete }
+
+canje:
+    pattern:  /{search}
+    defaults: { _controller: "BackendAdminBundle:Canje:index" , search: '' }

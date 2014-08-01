@@ -1,0 +1,38 @@
+<div class="control-group">
+{{ form_label(form.sucursal,"Sucursal", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.sucursal, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_errorloc' class="help-inline error" >{{ form_errors(form.sucursal) }}</div>
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(form.imeiLegacy,"Imei equipo Legacy", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.imeiLegacy, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_imeiLegacy_errorloc' class="help-inline error" >{{ form_errors(form.imeiLegacy) }}</div>
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.modeloLegacy,"Modelo Legacy", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.modeloLegacy, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+<div id='backend_adminbundle_modeloLegacy_clasificacion_errorloc' class="help-inline error" >{{ form_errors(form.modeloLegacy) }}</div>  
+</div>
+</div> 
+
+<div class="control-group">
+
+{{ form_label(form.imeiNuevo,"Imei Nuevo", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.imeiNuevo, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+<div id='backend_adminbundle_imeiNuevo_clasificacion_errorloc' class="help-inline error" >{{ form_errors(form.imeiNuevo) }}</div>  
+</div>
+</div> 
+
+
+
