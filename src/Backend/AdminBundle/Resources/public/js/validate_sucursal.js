@@ -8,7 +8,7 @@ $(document).ready(function() {
 					maxlength:100,
 				},
 				"backend_adminbundle_sucursal[responsable]": {
-					required:true,
+					required:false,
 					minlength:2,
 					maxlength:100,          
 				},
@@ -18,23 +18,23 @@ $(document).ready(function() {
 					maxlength:100,          
 				},
 				"backend_adminbundle_sucursal[numero]": {
-					required:true,
+					required:false,
           			minlength:2,
 					maxlength:8,
 					number: true,
 				},
 				"backend_adminbundle_sucursal[piso]": {
-					required:true,
+					required:false,
           			minlength:1,
 					maxlength:3,					
 				},
 				"backend_adminbundle_sucursal[cp]": {
-					required:true,
+					required:false,
           			minlength:4,
 					maxlength:10,					
 				},
 				"backend_adminbundle_sucursal[telefono]": {
-					required:true,
+					required:false,
 					minlength:8,
 					maxlength:15,
 				},
@@ -61,12 +61,6 @@ $(document).ready(function() {
             required: "Ingrese el nombre del responsable de la sucursal",
             maxlength: jQuery.format("Máximo {0} carácteres!"),
             minlength: jQuery.format("Mínimo {0} carácteres!")            
-            },
-            "backend_adminbundle_cliente[dni]": {
-            required: "Ingrese el DNI del cliente",
-            number: "Ingrese solo números",
-            maxlength: jQuery.format("Máximo {0} carácteres!"),
-            minlength: jQuery.format("Mínimo {0} carácteres!")
             },
             "backend_adminbundle_sucursal[calle]": {
             required: "Ingrese la calle",
