@@ -18,10 +18,6 @@
                             <li class="divider"></li>
                             <li><a href="{{ path('seteo') }}">Seteos</a></li>
                         {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}                        
-							<li class="divider"></li>
-							<li><a href="{{ path('tipoDeposito') }}">Depositos</a></li>
-                        {% endif %}                       
                         {% if is_granted('ROLE_VIEWPROVINCIA') %}
                             <li class="divider"></li>
                             <li><a href="{{ path('provincia') }}">Provincias</a></li>
@@ -29,11 +25,7 @@
                         {% if is_granted('ROLE_VIEWZONA') %}
                             <li class="divider"></li>
                             <li><a href="{{ path('zona') }}">Zonas</a></li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-							<li class="divider"></li>
-                            <li><a href="{{ path('tipo_ordeningreso') }}">Tipo de ordenes de Ingreso</a></li>
-						{% endif %}                        
+                        {% endif %}                                                
                       </ul>
                     </li>
                     {% endif %}
@@ -47,38 +39,22 @@
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entidades<b class="caret"></b></a>
                       <ul class="dropdown-menu" >
-                       {% if is_granted('ROLE_VIEWCLIENTE') %}
-                       <li> <a href="{{ path('cliente') }}"> Clientes</a> </li>
-                       <li class="divider"></li>
-                       {% endif %}
                        {% if is_granted('ROLE_VIEWSUCURSAL') %}
+                        <li> <a href="{{ path('centro') }}"> Centros</a> </li>
+                       <li class="divider"></li>
                        <li> <a href="{{ path('sucursal') }}"> Sucursales</a> </li>
-                       <li class="divider"></li>
-                       <li> <a href="{{ path('areaTrabajo') }}"> Areas de Trabajo</a> </li>
-                       <li class="divider"></li>
-                       {% endif %}
-                       {% if is_granted('ROLE_VIEWMARCA') %}
-                       <li> <a href="{{ path('marca') }}"> Marcas</a> </li>
-                       <li class="divider"></li>
-                       {% endif %}
-                       {% if is_granted('ROLE_VIEWMODELO') %}
-                       <li> <a href="{{ path('modelo') }}"> Modelos</a> </li>
-                       <li class="divider"></li>
-                       {% endif %}                     
-                       {% if is_granted('ROLE_VIEWSINTOMA') %}
-                       <li> <a href="{{ path('sintoma') }}"> Sintomas</a> </li>
-                       <li class="divider"></li>
+                       <li class="divider"></li>                       
                        {% endif %}
                        {% if is_granted('ROLE_VIEWTIPOARTICULO') %}
-                       <li> <a href="{{ path('tipo_articulo') }}"> Tipo Artículos</a> </li>
+                       <li> <a href="{{ path('modelo') }}">Modelos</a> </li>
                        <li class="divider"></li>
                        {% endif %}
                        {% if is_granted('ROLE_VIEWARTICULO') %}
-                       <li> <a href="{{ path('articulo') }}"> Artículos</a> </li>
-                       <li class="divider"></li>
+                       <li> <a href="{{ path('producto') }}">Equipos</a> </li>                       
                        {% endif %}
                       </ul>                      
                     </li> 
+                    
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ordenes<b class="caret"></b></a>
                       <ul class="dropdown-menu" >
@@ -91,11 +67,11 @@
                        <li class="divider"></li>
                        {% endif %}
                        {% if is_granted('ROLE_VIEWCLIENTE') %}
-                       <li> <a href="{{ path('cliente') }}"> Ordenes de Egreso</a> </li>
+                       <li> <a href="{{ path('canje') }}"> Canjes</a> </li>
                        {% endif %}
                       </ul>
                       {% endif %}
-                    </li>  
+                   </li>  
                 </ul>
               {% endif %}  
                 
