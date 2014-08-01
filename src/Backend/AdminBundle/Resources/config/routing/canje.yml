@@ -25,6 +25,11 @@ canje_delete:
     defaults: { _controller: "BackendAdminBundle:Canje:delete" }
     requirements: { _method: post|delete }
 
+canje_toprocesado:
+    pattern:  /toprocesado
+    defaults: { _controller: "BackendAdminBundle:Canje:toProcesado" }
+
 canje:
     pattern:  /{search}
     defaults: { _controller: "BackendAdminBundle:Canje:index" , search: '' }
+

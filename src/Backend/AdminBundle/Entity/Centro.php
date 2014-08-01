@@ -26,37 +26,37 @@ class Centro
     private $nombre;
 
     /**
-     * @ORM\Column(name="responsable", type="string", length=100)
+     * @ORM\Column(name="responsable", type="string", length=100,nullable=true)
      */
 
     private $responsable;
 
     /**
-     * @ORM\Column(name="calle", type="string", length=100)
+     * @ORM\Column(name="calle", type="string", length=100,nullable=true)
      */
    
     private $calle;
 
     /**
-     * @ORM\Column(name="numero", type="integer")
+     * @ORM\Column(name="numero", type="integer",nullable=true)
      */
 
     private $numero;
 
     /**
-     * @ORM\Column(name="piso", type="integer")
+     * @ORM\Column(name="piso", type="integer",nullable=true)
      */    
 
     private $piso;
 
     /**
-     * @ORM\Column(name="cp", type="string", length=100)
+     * @ORM\Column(name="cp", type="string", length=100,nullable=true)
      */
     
     private $cp;
 
      /**
-     * @ORM\Column(name="telefono", type="string", length=100)
+     * @ORM\Column(name="telefono", type="string", length=100,nullable=true)
      */
 
     private $telefono;

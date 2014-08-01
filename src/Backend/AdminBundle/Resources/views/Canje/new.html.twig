@@ -16,6 +16,10 @@
 
     
     {{ form_rest(form) }}
+    
+    <div class="control-group">
+<button id="validar" type="button" class="btn" data-url="{{ path('canje_toprocesado') }}">Validar</button>
+</div>
 
     <div class="control-group">
     <!-- Button -->
@@ -37,8 +41,10 @@
 {% endblock %}
 {% block javascripts %}
   {{ parent() }}
- 
-{% javascripts '@BackendAdminBundle/Resources/public/js/validate_modelo.js' %}
+{% javascripts '@BackendAdminBundle/Resources/public/js/ajax_canje.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %} 
+{% javascripts '@BackendAdminBundle/Resources/public/js/validate_canje.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% endblock %}

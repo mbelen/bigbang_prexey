@@ -270,6 +270,24 @@ class CanjeController extends Controller
         ;
     }
     
+    public function toProcesadoAction(Request $request){
+			
+			$imeiNuevo = explode(",",$request->query->get("imeiNuevo"));
+			$em = $this->getDoctrine()->getManager();
+			$producto = $em->getRepository('BackendAdminBundle:Producto')->findOneByImei($imeiNuevo);
+			if(!$producto){
+				$data["modelo"]= "No hay registro de ese imei";
+			}else{
+				$modelo = $producto->getModelo()->getName();
+				$svn = $producto->getSvn();
+				$data["modelo"]= $modelo;
+			}
+			$response = new Response(json_encode($data));
+			$response->headers->set('Content-Type', 'application/json');
+			
+			return $response;
+	}
+    
      public function exportarAction(Request $request)
     {
      if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
@@ -306,6 +324,7 @@ class CanjeController extends Controller
                            
           $i++;
         }
+                     
                             
         $excelService->excelObj->getActiveSheet()->setTitle('Listado de Canjes');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet

@@ -26,41 +26,11 @@ class Producto
     private $imei;
 
     /**
-     * @ORM\Column(name="svn", type="string", length=15, nullable=true)
+     * @ORM\Column(name="msn", type="string", length=15, nullable=true)
      */
 
-    private $svn;
-
-    /**
-     * @ORM\Column(name="calle", type="string", length=100)
-     */
-   
-    private $calle;
-
-    /**
-     * @ORM\Column(name="numero", type="integer")
-     */
-
-    private $numero;
-
-    /**
-     * @ORM\Column(name="piso", type="integer")
-     */    
-
-    private $piso;
-
-    
-    /**
-     * @ORM\Column(name="fax", type="string", length=100, nullable=true) 
-     */   
-    
-    private $fax;
-
-    /**
-     * @ORM\Column(name="email", type="string", length=100, nullable=true) 
-     */
-    private $email;
-
+    private $msn;
+       
     /**
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -80,24 +50,39 @@ class Producto
     private $isAvailable;
   
     /**
-     * @ORM\ManyToOne(targetEntity="Centro", inversedBy="sucursales")
-     * @ORM\JoinColumn(name="centro_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Sucursal", inversedBy="productos")
+     * @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
      */
         
-    private $centro;   
-
+    private $sucursal;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Modelo", inversedBy="productos")
+     * @ORM\JoinColumn(name="modelo_id", referencedColumnName="id")
+     */
+        
+    private $modelo;   
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Origen", inversedBy="productos")
+     * @ORM\JoinColumn(name="origen_id", referencedColumnName="id")
+     */
+        
+    private $origen; 
+    
     
     /**
      * @ORM\Column(name="is_delete", type="boolean" )
      */
  
     private $isDelete;
+    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->areas = new ArrayCollection();
+        
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
@@ -112,214 +97,7 @@ class Producto
     {
         return $this->id;
     }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     * @return Sucursal
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string 
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set responsable
-     *
-     * @param string $responsable
-     * @return Sucursal
-     */
-    public function setResponsable($responsable)
-    {
-        $this->responsable = $responsable;
-    
-        return $this;
-    }
-
-    /**
-     * Get responsable
-     *
-     * @return string 
-     */
-    public function getResponsable()
-    {
-        return $this->responsable;
-    }
-
-    /**
-     * Set calle
-     *
-     * @param string $calle
-     * @return Sucursal
-     */
-    public function setCalle($calle)
-    {
-        $this->calle = $calle;
-    
-        return $this;
-    }
-
-    /**
-     * Get calle
-     *
-     * @return string 
-     */
-    public function getCalle()
-    {
-        return $this->calle;
-    }
-
-    /**
-     * Set numero
-     *
-     * @param integer $numero
-     * @return Sucursal
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-    
-        return $this;
-    }
-
-    /**
-     * Get numero
-     *
-     * @return integer 
-     */
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    /**
-     * Set piso
-     *
-     * @param integer $piso
-     * @return Sucursal
-     */
-    public function setPiso($piso)
-    {
-        $this->piso = $piso;
-    
-        return $this;
-    }
-
-    /**
-     * Get piso
-     *
-     * @return integer 
-     */
-    public function getPiso()
-    {
-        return $this->piso;
-    }
-
-    /**
-     * Set cp
-     *
-     * @param string $cp
-     * @return Sucursal
-     */
-    public function setCp($cp)
-    {
-        $this->cp = $cp;
-    
-        return $this;
-    }
-
-    /**
-     * Get cp
-     *
-     * @return string 
-     */
-    public function getCp()
-    {
-        return $this->cp;
-    }
-
-    /**
-     * Set telefono
-     *
-     * @param string $telefono
-     * @return Sucursal
-     */
-    public function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
-    
-        return $this;
-    }
-
-    /**
-     * Get telefono
-     *
-     * @return string 
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
-
-    /**
-     * Set fax
-     *
-     * @param string $fax
-     * @return Sucursal
-     */
-    public function setFax($fax)
-    {
-        $this->fax = $fax;
-    
-        return $this;
-    }
-
-    /**
-     * Get fax
-     *
-     * @return string 
-     */
-    public function getFax()
-    {
-        return $this->fax;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Sucursal
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    
+         
     /**
      * @ORM\PreUpdate()
      * 
@@ -357,7 +135,7 @@ class Producto
      * Set modifiedAt
      *
      * @param \DateTime $modifiedAt
-     * @return Sucursal
+     * @return Producto
      */
     public function setModifiedAt($modifiedAt)
     {
@@ -374,29 +152,6 @@ class Producto
     public function getModifiedAt()
     {
         return $this->modifiedAt;
-    }
-
-    /**
-     * Set centro
-     *
-     * @param \Backend\AdminBundle\Entity\Centro $centro
-     * @return Sucursal
-     */
-    public function setCentro(\Backend\AdminBundle\Entity\Centro $centro = null)
-    {
-        $this->centro = $centro;
-    
-        return $this;
-    }
-
-    /**
-     * Get centro
-     *
-     * @return \Backend\AdminBundle\Entity\Centro 
-     */
-    public function getCentro()
-    {
-        return $this->centro;
     }
 
     /**
@@ -420,5 +175,149 @@ class Producto
     public function getIsDelete()
     {
         return $this->isDelete;
+    }
+
+    /**
+     * Set imei
+     *
+     * @param string $imei
+     * @return Producto
+     */
+    public function setImei($imei)
+    {
+        $this->imei = $imei;
+    
+        return $this;
+    }
+
+    /**
+     * Get imei
+     *
+     * @return string 
+     */
+    public function getImei()
+    {
+        return $this->imei;
+    }
+    
+    /**
+     * Set isAvailable
+     *
+     * @param boolean $isAvailable
+     * @return Producto
+     */
+    public function setIsAvailable($isAvailable)
+    {
+        $this->isAvailable = $isAvailable;
+    
+        return $this;
+    }
+
+    /**
+     * Get isAvailable
+     *
+     * @return boolean 
+     */
+    public function getIsAvailable()
+    {
+        return $this->isAvailable;
+    }
+
+    /**
+     * Set sucursal
+     *
+     * @param \Backend\AdminBundle\Entity\Sucursal $sucursal
+     * @return Producto
+     */
+    public function setSucursal(\Backend\AdminBundle\Entity\Sucursal $sucursal = null)
+    {
+        $this->sucursal = $sucursal;
+    
+        return $this;
+    }
+
+    /**
+     * Get sucursal
+     *
+     * @return \Backend\AdminBundle\Entity\Sucursal 
+     */
+    public function getSucursal()
+    {
+        return $this->sucursal;
+    }
+    
+    public function getCentro(){
+		
+		return $this->sucursal->centro;
+	
+	}	
+
+    /**
+     * Set modelo
+     *
+     * @param \Backend\AdminBundle\Entity\Modelo $modelo
+     * @return Producto
+     */
+    public function setModelo(\Backend\AdminBundle\Entity\Modelo $modelo = null)
+    {
+        $this->modelo = $modelo;
+    
+        return $this;
+    }
+
+    /**
+     * Get modelo
+     *
+     * @return \Backend\AdminBundle\Entity\Modelo 
+     */
+    public function getModelo()
+    {
+        return $this->modelo;
+    }
+
+    /**
+     * Set msn
+     *
+     * @param string $msn
+     * @return Producto
+     */
+    public function setMsn($msn)
+    {
+        $this->msn = $msn;
+    
+        return $this;
+    }
+
+    /**
+     * Get msn
+     *
+     * @return string 
+     */
+    public function getMsn()
+    {
+        return $this->msn;
+    }
+
+    /**
+     * Set origen
+     *
+     * @param \Backend\AdminBundle\Entity\Origen $origen
+     * @return Producto
+     */
+    public function setOrigen(\Backend\AdminBundle\Entity\Origen $origen = null)
+    {
+        $this->origen = $origen;
+    
+        return $this;
+    }
+
+    /**
+     * Get origen
+     *
+     * @return \Backend\AdminBundle\Entity\Origen 
+     */
+    public function getOrigen()
+    {
+        return $this->origen;
     }
 }
