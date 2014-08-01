@@ -140,18 +140,18 @@ class CanjeController extends Controller
         if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) { 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendAdminBundle:Producto')->find($id);
+        $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);
 
         if (!$entity) {
             
-             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el producto .');
-             return $this->redirect($this->generateUrl('producto'));
+             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el canje .');
+             return $this->redirect($this->generateUrl('canje'));
         }
 
         $editForm = $this->createForm(new ProductoType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BackendAdminBundle:Producto:edit.html.twig', array(
+        return $this->render('BackendAdminBundle:Canje:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -169,10 +169,10 @@ class CanjeController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Producto $entity)
+    private function createEditForm(Canje $entity)
     {
-        $form = $this->createForm(new ProductoType(), $entity, array(
-            'action' => $this->generateUrl('producto_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new CanjeType(), $entity, array(
+            'action' => $this->generateUrl('canje_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -181,7 +181,7 @@ class CanjeController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Sucursal entity.
+     * Edits an existing Canje entity.
      *
      */
     public function updateAction(Request $request, $id)
@@ -189,25 +189,25 @@ class CanjeController extends Controller
         if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) {  
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendAdminBundle:Producto')->find($id);
+        $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);
 
         if (!$entity) {
-             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el producto.');
-             return $this->redirect($this->generateUrl('producto'));
+             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el canje.');
+             return $this->redirect($this->generateUrl('canje'));
         }
 
        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ProductoType(), $entity);
+        $editForm = $this->createForm(new CanjeType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
              $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos del producto.');
-            return $this->redirect($this->generateUrl('producto_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('canje_edit', array('id' => $id)));
         }
 
-        return $this->render('BackendAdminBundle:Producto:edit.html.twig', array(
+        return $this->render('BackendAdminBundle:Canje:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -229,10 +229,10 @@ class CanjeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BackendAdminBundle:Producto')->find($id);
+            $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);
 
             if (!$entity) {
-                $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el producto.');
+                $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el canje.');
              
             }
            else{
@@ -244,12 +244,12 @@ class CanjeController extends Controller
             
            
             
-            $this->get('session')->getFlashBag()->add('success' , 'Se han borrado los datos del producto.');
+            $this->get('session')->getFlashBag()->add('success' , 'Se han borrado los datos del canje.');
             
             }
         }
 
-        return $this->redirect($this->generateUrl('producto'));
+        return $this->redirect($this->generateUrl('canje'));
       }
       else
        throw new AccessDeniedException(); 
@@ -287,10 +287,8 @@ class CanjeController extends Controller
                             
         $excelService->excelObj->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Sucursal')
-                    ->setCellValue('B1', 'Modelo')
-                    ->setCellValue('C1', 'Imei')
-                    ->setCellValue('D1', 'MSN')
-                    ->setCellValue('E1', 'Disponible')
+                    ->setCellValue('B1', 'Fecha')
+                    ->setCellValue('C1', 'ImeiNuevo')
                     ;
         
         $resultados=$query->getResult();
@@ -300,17 +298,16 @@ class CanjeController extends Controller
          
            $excelService->excelObj->setActiveSheetIndex(0)
                          ->setCellValue("A$i",$r->getSucursal())
-                         ->setCellValue("B$i",$r->getModelo())
-                         ->setCellValue("C$i",$r->getImei())
-                         ->setCellValue("D$i",$r->getMsn())
-                         ->setCellValue("E$i",$r->getIsAvailable())
+                         ->setCellValue("D$i",$r->getCreatedAt())
+                         ->setCellValue("C$i",$r->getImeiNuevo())                         
+                         
                          ;
                 
                            
           $i++;
         }
                             
-        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Choferes');
+        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Canjes');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $excelService->excelObj->setActiveSheetIndex(0);
         $excelService->excelObj->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
@@ -322,7 +319,7 @@ class CanjeController extends Controller
         $excelService->excelObj->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
         $excelService->excelObj->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
         
-        $fileName="productos_".date("Ymd").".xls";
+        $fileName="canjes_".date("Ymd").".xls";
         //create the response
         $response = $excelService->getResponse();
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
