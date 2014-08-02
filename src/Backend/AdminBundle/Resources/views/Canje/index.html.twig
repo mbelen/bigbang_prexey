@@ -44,21 +44,21 @@
     </tr>
     </thead>
     <tbody>
-     {% for modelo in pagination %}
-   
-    
+     {% for canje in pagination %}
+       
      <tr>
                 
-                <td>{{ canje.sucursal|capitalize }}</td>
-                <td>{{ canje.createdAt }}</td>
+                <td>{{ canje.sucursal.nombre|capitalize }}</td>
+                <td>{{ canje.createdAt|date('d-m-Y h:m:s')}}</td>
                 <td>{{ canje.imeiLegacy }}</td>
-                <td>{% if modelo.isLegacy %} Si {% else %} No {% endif %}</td>
+                <td>{{ canje.modeloLegacy.name }}</td>
+                <td></td>
                 <td>
                 {% if is_granted("ROLE_MODMODELO") %}
-                <a href="{{ path('modelo_edit', { 'id': modelo.id }) }}"><i class="icon-pencil"></i></a>
+                <a href="{{ path('canje_edit', { 'id': canje.id }) }}"><i class="icon-pencil"></i></a>
                 {% endif %}
                  {% if is_granted("ROLE_DELMODELO") %}
-                <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ modelo.id }} ><i class="icon-remove"></i></a>
+                <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ canje.id }} ><i class="icon-remove"></i></a>
                 
                  {% endif %}
                 </td>

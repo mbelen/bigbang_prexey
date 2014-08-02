@@ -19,6 +19,7 @@ class CanjeController extends Controller
      public function generateSQL($search){
      
         $dql="SELECT u FROM BackendAdminBundle:Canje u where u.isDelete=false"  ;
+                       
         $search=mb_convert_case($search,MB_CASE_LOWER);
         
        /*
@@ -73,7 +74,13 @@ class CanjeController extends Controller
         $form->bind($request);
          
         if ($form->isValid()) {
+			
             $em = $this->getDoctrine()->getManager();
+            $productoNuevo = $em->getRepository('BackendAdminBundle:Producto')->findOneByImei($entity->getImeiNuevo());
+            
+            $productoNuevo->setIsAvailable(false);
+            $em->persist($productoNuevo);       
+            
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success' , 'Se ha agregado un nuevo canje.');
@@ -282,6 +289,8 @@ class CanjeController extends Controller
 				
 				$modelo = $producto->getModelo()->getName();
 				$data["modelo"]= $modelo;
+				$id = $producto->getId();
+				$data["id"]=$id;
 			}
 			$response = new Response(json_encode($data));
 			$response->headers->set('Content-Type', 'application/json');

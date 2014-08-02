@@ -25,6 +25,7 @@ class CanjeType extends AbstractType
                 'class'=>'BackendAdminBundle:Modelo',
                 'property'=>'name',
             ))
+            ->add('idNuevo','hidden')
             ;
     }
     
