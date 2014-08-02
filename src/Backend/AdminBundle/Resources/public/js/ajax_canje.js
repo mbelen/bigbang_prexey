@@ -1,9 +1,9 @@
-$(document).ready(function() {
+$("#validar").click(function() {
 
  var path=$("#validar").data("url");
  
-          var dataString = "12345678910123";
-         
+          var dataString = "imeiNuevo="+$("#backend_adminbundle_modelo_imeiNuevo").val();
+          alert(dataString);         
           $.ajax({
               type: "GET",
               url: path,
@@ -11,11 +11,17 @@ $(document).ready(function() {
               data: dataString,
             })
             .done(function(data){
-                alert(data.message);
-                location.reload(); 
+                if(!data.modelo){
+					$('#backend_adminbundle_imeiNuevo_errorloc').html("El imei no corresponde a un equipo cargado");
+                }
+                else{
+						
+					$('#backend_adminbundle_modeloNuevo').html("hola");
+				}       
+                 
             })
             .always(function(){
                 $("#validar").removeAttr('disabled');
             });
-            
+                        
 });

@@ -20,7 +20,7 @@
 <div class="controls">
 {{ form_widget(form.modeloLegacy, { 'attr': {'class': 'input-xlarge'} }) }}
     
-<div id='backend_adminbundle_modeloLegacy_clasificacion_errorloc' class="help-inline error" >{{ form_errors(form.modeloLegacy) }}</div>  
+<div id='backend_adminbundle_modeloLegacy_errorloc' class="help-inline error" >{{ form_errors(form.modeloLegacy) }}</div>  
 </div>
 </div> 
 
@@ -30,9 +30,14 @@
 <div class="controls">
 {{ form_widget(form.imeiNuevo, { 'attr': {'class': 'input-xlarge'} }) }}
     
-<div id='backend_adminbundle_imeiNuevo_clasificacion_errorloc' class="help-inline error" >{{ form_errors(form.imeiNuevo) }}</div>  
+<div id='backend_adminbundle_imeiNuevo_errorloc' class="help-inline error" >{{ form_errors(form.imeiNuevo) }}</div>  
 </div>
 </div> 
+
+
+<div id="backend_adminbundle_modeloNuevo_resultado"></div>
+
+
 
 
 

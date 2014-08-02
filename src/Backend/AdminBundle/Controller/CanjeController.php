@@ -3,13 +3,14 @@
 namespace Backend\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Backend\AdminBundle\Entity\Canje;
 use Backend\AdminBundle\Form\CanjeType;
 
 /**
- * Producto controller.
+ * Canje controller.
  *
  */
 class CanjeController extends Controller
@@ -76,12 +77,12 @@ class CanjeController extends Controller
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success' , 'Se ha agregado un nuevo canje.');
-            return $this->redirect($this->generateUrl('producto_edit', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('canje_edit', array('id' => $entity->getId())));
         }
         
         
 
-        return $this->render('BackendAdminBundle:Producto:new.html.twig', array(
+        return $this->render('BackendAdminBundle:Canje:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
            
@@ -148,7 +149,7 @@ class CanjeController extends Controller
              return $this->redirect($this->generateUrl('canje'));
         }
 
-        $editForm = $this->createForm(new ProductoType(), $entity);
+        $editForm = $this->createForm(new CanjeType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BackendAdminBundle:Canje:edit.html.twig', array(
@@ -203,7 +204,7 @@ class CanjeController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-             $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos del producto.');
+             $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos del canje.');
             return $this->redirect($this->generateUrl('canje_edit', array('id' => $id)));
         }
 
@@ -276,10 +277,10 @@ class CanjeController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			$producto = $em->getRepository('BackendAdminBundle:Producto')->findOneByImei($imeiNuevo);
 			if(!$producto){
-				$data["modelo"]= "No hay registro de ese imei";
+				$data["modelo"]= false;
 			}else{
+				
 				$modelo = $producto->getModelo()->getName();
-				$svn = $producto->getSvn();
 				$data["modelo"]= $modelo;
 			}
 			$response = new Response(json_encode($data));
