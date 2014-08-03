@@ -24,28 +24,46 @@ class Modelo
      * @ORM\Column(name="nameManufacture", type="string", length=100)
      */
     public $nameManufacture;
-    /**
-     * @ORM\Column(name="variante", type="string", length=100, nullable=true)
+            
+     /**
+     * @ORM\Column(name="is_legacy", type="boolean",nullable=true)
      */
-    public $variante;
-    
-        /**
+        
+    public $isLegacy;
+        
+     /**
      * @ORM\Column(name="is_delete", type="boolean" )
      */
+    
     private $isDelete;
-
+    
     /**
-     * @ORM\ManyToOne(targetEntity="Marca", inversedBy="modelos")
-     * @ORM\JoinColumn(name="marca_id", referencedColumnName="id")
-     */    
-    public $marca;
+     * @ORM\ManyToOne(targetEntity="Clasificacion", inversedBy="modelos")
+     * @ORM\JoinColumn(name="clasificacion_id", referencedColumnName="id")
+     */
+        
+    private $clasificacion;
     
-   public function __construct()
-    {
-        $this->isDelete=false;
-    }
+    /**
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="modelo")
+     */
 
+    protected $productos;
+      
+    /**
+     * @ORM\OneToMany(targetEntity="Canje", mappedBy="modelo")
+     */
+
+    protected $canjes;  
     
+    
+    
+	public function __construct()
+    {
+        $this->productos = new ArrayCollection();
+        $this->isDelete=false;
+        $this->isLegacy = false;
+    }
 
     /**
      * Get id
@@ -104,29 +122,6 @@ class Modelo
     }
 
     /**
-     * Set variante
-     *
-     * @param string $variante
-     * @return Modelo
-     */
-    public function setVariante($variante)
-    {
-        $this->variante = $variante;
-    
-        return $this;
-    }
-
-    /**
-     * Get variante
-     *
-     * @return string 
-     */
-    public function getVariante()
-    {
-        return $this->variante;
-    }
-
-    /**
      * Set isDelete
      *
      * @param boolean $isDelete
@@ -149,26 +144,116 @@ class Modelo
         return $this->isDelete;
     }
 
+
     /**
-     * Set marca
+     * Set isLegacy
      *
-     * @param \Backend\AdminBundle\Entity\Marca $marca
+     * @param boolean $isLegacy
      * @return Modelo
      */
-    public function setMarca(\Backend\AdminBundle\Entity\Marca $marca = null)
+    public function setIsLegacy($isLegacy)
     {
-        $this->marca = $marca;
+        $this->isLegacy = $isLegacy;
     
         return $this;
     }
 
     /**
-     * Get marca
+     * Get isLegacy
      *
-     * @return \Backend\AdminBundle\Entity\Marca 
+     * @return boolean 
      */
-    public function getMarca()
+    public function getIsLegacy()
     {
-        return $this->marca;
+        return $this->isLegacy;
+    }
+
+    /**
+     * Add productos
+     *
+     * @param \Backend\AdminBundle\Entity\Producto $productos
+     * @return Modelo
+     */
+    public function addProducto(\Backend\AdminBundle\Entity\Producto $productos)
+    {
+        $this->productos[] = $productos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param \Backend\AdminBundle\Entity\Producto $productos
+     */
+    public function removeProducto(\Backend\AdminBundle\Entity\Producto $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * Set clasificacion
+     *
+     * @param \Backend\AdminBundle\Entity\Clasificacion $clasificacion
+     * @return Modelo
+     */
+    public function setClasificacion(\Backend\AdminBundle\Entity\Clasificacion $clasificacion = null)
+    {
+        $this->clasificacion = $clasificacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get clasificacion
+     *
+     * @return \Backend\AdminBundle\Entity\Clasificacion 
+     */
+    public function getClasificacion()
+    {
+        return $this->clasificacion;
+    }
+
+    /**
+     * Add canjes
+     *
+     * @param \Backend\AdminBundle\Entity\Canje $canjes
+     * @return Modelo
+     */
+    public function addCanje(\Backend\AdminBundle\Entity\Canje $canjes)
+    {
+        $this->canjes[] = $canjes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove canjes
+     *
+     * @param \Backend\AdminBundle\Entity\Canje $canjes
+     */
+    public function removeCanje(\Backend\AdminBundle\Entity\Canje $canjes)
+    {
+        $this->canjes->removeElement($canjes);
+    }
+
+    /**
+     * Get canjes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCanjes()
+    {
+        return $this->canjes;
     }
 }
