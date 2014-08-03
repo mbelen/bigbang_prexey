@@ -26,7 +26,10 @@ class CanjeType extends AbstractType
                 'property'=>'name',
             ))
             ->add('idNuevo','hidden')
-            ;
+            
+            ;         
+            
+            
     }
     
     /**
@@ -44,6 +47,6 @@ class CanjeType extends AbstractType
      */
     public function getName()
     {
-        return 'backend_adminbundle_modelo';
+        return 'backend_adminbundle_canje';
     }
 }

@@ -2,7 +2,7 @@ $("#validar").click(function() {
 
  var path=$("#validar").data("url");
  
-          var dataString = "imeiNuevo="+$("#backend_adminbundle_modelo_imeiNuevo").val();
+          var dataString = "imeiNuevo="+$("#backend_adminbundle_canje_imeiNuevo").val();
                    
           $.ajax({
               type: "GET",
@@ -18,7 +18,7 @@ $("#validar").click(function() {
 					console.log(data.id);
 					console.log(data.modelo);	
 					$('#backend_adminbundle_modeloNuevo').html("hola");
-					$('#backend_adminbundle_modelo_idNuevo').val(data.id);
+					$('#backend_adminbundle_canje_productoNuevo').val(data.id);
 				}       
                  
             })

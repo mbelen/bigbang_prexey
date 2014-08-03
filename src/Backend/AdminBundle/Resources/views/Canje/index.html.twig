@@ -56,10 +56,7 @@
                 <td>{{ canje.productoNuevo.modelo.name }}</td>
                 <td></td>
                 <td>
-                {% if is_granted("ROLE_MODMODELO") %}
-                <a href="{{ path('canje_edit', { 'id': canje.id }) }}"><i class="icon-pencil"></i></a>
-                {% endif %}
-                 {% if is_granted("ROLE_DELMODELO") %}
+                {% if is_granted("ROLE_DELMODELO") %}
                 <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ canje.id }} ><i class="icon-remove"></i></a>
                 
                  {% endif %}

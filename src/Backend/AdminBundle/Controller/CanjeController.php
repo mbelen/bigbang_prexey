@@ -82,8 +82,9 @@ class CanjeController extends Controller
             $productoNuevo = $em->getRepository('BackendAdminBundle:Producto')->findOneByImei($entity->getImeiNuevo());
             
             $productoNuevo->setIsAvailable(false);
-            $em->persist($productoNuevo);       
-            
+            $em->persist($productoNuevo);
+                   
+            $entity->setProductoNuevo($productoNuevo);
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success' , 'Se ha agregado un nuevo canje.');
@@ -240,14 +241,18 @@ class CanjeController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);
+            $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);                       
 
             if (!$entity) {
                 $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el canje.');
              
             }
            else{
+			   
+			$productoNuevo = $em->getRepository('BackendAdminBundle:Producto')->findOneByImei($entity->getImeiNuevo());
             
+            $productoNuevo->setIsAvailable(true);
+            $em->persist($productoNuevo);            
           
             $entity->setIsDelete(true); //baja lógica
             $em->persist($entity);
