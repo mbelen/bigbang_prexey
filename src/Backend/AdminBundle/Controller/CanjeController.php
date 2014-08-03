@@ -18,7 +18,10 @@ class CanjeController extends Controller
 
      public function generateSQL($search){
      
-        $dql="SELECT u FROM BackendAdminBundle:Canje u where u.isDelete=false"  ;
+        //$dql="SELECT u FROM BackendAdminBundle:Canje u where u.isDelete=false"  ;
+        
+        $dql="SELECT c FROM BackendAdminBundle:Canje c 
+			  JOIN c.productoNuevo p where c.isDelete=false"  ;
                        
         $search=mb_convert_case($search,MB_CASE_LOWER);
         

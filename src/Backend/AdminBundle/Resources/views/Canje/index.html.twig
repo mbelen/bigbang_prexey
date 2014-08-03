@@ -52,6 +52,8 @@
                 <td>{{ canje.createdAt|date('d-m-Y h:m:s')}}</td>
                 <td>{{ canje.imeiLegacy }}</td>
                 <td>{{ canje.modeloLegacy.name }}</td>
+                <td>{{ canje.ImeiNuevo }}</td>
+                <td>{{ canje.productoNuevo.modelo.name }}</td>
                 <td></td>
                 <td>
                 {% if is_granted("ROLE_MODMODELO") %}
@@ -81,11 +83,11 @@
       <h3 id="myModalLabel">Confirmar Borrado</h3>
      </div>
      <div class="modal-body">
-       <p class="error-text">Esta seguro que desea borrar el modelo?</p>
+       <p class="error-text">Esta seguro que desea borrar el canje?</p>
      </div>
      <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-      <button class="btn btn-danger " data-id="0"  data-url="{{ path('modelo_delete', { 'id': 'id' }) }}">Borrar</button>
+      <button class="btn btn-danger " data-id="0"  data-url="{{ path('canje_delete', { 'id': 'id' }) }}">Borrar</button>
      </div>
     </div>
     
