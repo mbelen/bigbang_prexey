@@ -17,17 +17,11 @@ class ModeloType extends AbstractType
         $builder
             ->add('name')
             ->add('nameManufacture')
-            ->add('variante')
-            ->add('marca', 'entity',array(
-            'class'=>'BackendAdminBundle:Marca',
-            'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder("u")
-                         ->select("u")
-                         ->where('u.isDelete = :delete')
-                         ->setParameter('delete',false)
-                         ->orderBy('u.name', 'ASC');
-                      
-            }))
+            ->add('isLegacy')
+            ->add('clasificacion','entity',array(
+                'class'=>'BackendAdminBundle:Clasificacion',
+                'property'=>'name',
+            ))
             ;
     }
     
