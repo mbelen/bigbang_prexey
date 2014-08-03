@@ -36,6 +36,7 @@
     <table class="table">
     <thead>
     <tr>
+    <th>Centro</th>
     <th>Sucursal</th>
 	<th>Modelo</th>
 	<th>Imei</th>
@@ -49,6 +50,7 @@
      {% for producto in pagination %}
     
      <tr>                
+				<td>{{ producto.sucursal.centro.nombre}}</td>
 				<td>{{ producto.sucursal.nombre}}</td>
                 <td>{{ producto.modelo.name}}</td>     
                 <td>{{ producto.imei}}</td>

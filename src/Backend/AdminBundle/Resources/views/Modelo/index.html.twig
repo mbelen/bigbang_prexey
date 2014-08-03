@@ -37,10 +37,10 @@
     <thead>
     <tr>
     
-    <th {% if pagination.isSorted('u.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nombre', 'u.name') }}</th>
+    <th {% if pagination.isSorted('u.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nombre Comercial', 'u.name') }}</th>
     <th>Nombre Fábrica</th>
-    <th>Variante</th>
-    <th {% if pagination.isSorted('u.marca') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Marca', 'u.marca') }}</th>
+    <th>Clasificacion</th>
+    <th>Legacy</th>
     <th style="width: 36px;">Acciones</th>
     </tr>
     </thead>
@@ -52,8 +52,8 @@
                 
                 <td>{{ modelo.name|capitalize }}</td>
                 <td>{{ modelo.nameManufacture }}</td>
-                <td>{{ modelo.variante }}</td>
-                <td>{{ modelo.marca }}</td>
+                <td>{{ modelo.clasificacion.name }}</td>
+                <td>{% if modelo.isLegacy %} Si {% else %} No {% endif %}</td>
                 <td>
                 {% if is_granted("ROLE_MODMODELO") %}
                 <a href="{{ path('modelo_edit', { 'id': modelo.id }) }}"><i class="icon-pencil"></i></a>
