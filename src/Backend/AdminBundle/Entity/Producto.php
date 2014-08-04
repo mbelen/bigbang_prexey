@@ -74,7 +74,7 @@ class Producto
      * @ORM\OneToMany(targetEntity="Canje", mappedBy="productoNuevo")
      */
     private $canjes;
-    
+        
     /**
      * @ORM\Column(name="is_delete", type="boolean" )
      */
@@ -87,8 +87,8 @@ class Producto
     public function __construct()
     {
        $this->canjes = new ArrayCollection(); 
-        $this->createdAt = new \DateTime('now');
-        $this->isDelete=false;       
+       $this->createdAt = new \DateTime('now');
+       $this->isDelete=false;       
     }
 
   
@@ -245,11 +245,18 @@ class Producto
      *
      * @return \Backend\AdminBundle\Entity\Sucursal 
      */
+    
     public function getSucursal()
     {
         return $this->sucursal;
     }
     
+    /**
+     * Get centro
+     *
+     * @return \Backend\AdminBundle\Entity\Centro 
+     */
+      
     public function getCentro(){
 		
 		return $this->sucursal->centro;

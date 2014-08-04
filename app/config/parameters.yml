@@ -3,7 +3,7 @@ parameters:
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     bigbang
-    database_user:     prexey
+    database_user:     bigbang
     database_password: pepito
 
     mailer_transport:  smtp

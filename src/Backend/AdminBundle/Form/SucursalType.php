@@ -56,7 +56,7 @@ class SucursalType extends AbstractType
                 }         
             },
                 'property'=>'nombre',
-                'multiple'=>false //un solo deposito por operario
+                'multiple'=>false, //un solo deposito por operario
             ));
             
         ;

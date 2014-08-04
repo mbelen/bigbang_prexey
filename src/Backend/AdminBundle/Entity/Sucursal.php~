@@ -26,43 +26,43 @@ class Sucursal
     private $nombre;
 
     /**
-     * @ORM\Column(name="responsable", type="string", length=100)
+     * @ORM\Column(name="responsable", type="string", length=100,nullable=true)
      */
 
     private $responsable;
 
     /**
-     * @ORM\Column(name="calle", type="string", length=100)
+     * @ORM\Column(name="calle", type="string", length=100,nullable=true)
      */
    
     private $calle;
 
     /**
-     * @ORM\Column(name="numero", type="integer")
+     * @ORM\Column(name="numero", type="integer",nullable=true)
      */
 
     private $numero;
 
     /**
-     * @ORM\Column(name="piso", type="integer")
+     * @ORM\Column(name="piso", type="integer",nullable=true)
      */    
 
     private $piso;
 
     /**
-     * @ORM\Column(name="cp", type="string", length=100)
+     * @ORM\Column(name="cp", type="string", length=100,nullable=true)
      */
     
     private $cp;
 
      /**
-     * @ORM\Column(name="telefono", type="string", length=100)
+     * @ORM\Column(name="telefono", type="string", length=100,nullable=true)
      */
 
     private $telefono;
 
     /**
-     * @ORM\Column(name="fax", type="string", length=100, nullable=true) 
+     * @ORM\Column(name="fax", type="string", length=100, nullable=true,nullable=true) 
      */   
     
     private $fax;
@@ -83,29 +83,43 @@ class Sucursal
      */
     
     private $modifiedAt;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Centro", inversedBy="sucursales")
+     * @ORM\JoinColumn(name="centro_id", referencedColumnName="id")
+     */
+        
+    private $centro;
 
     /**
-     * @ORM\OneToMany(targetEntity="AreaTrabajo", mappedBy="sucursal")
-     */
-
-    protected $areas;    
-
-     /**
      * @ORM\Column(name="is_delete", type="boolean" )
      */
+    
     private $isDelete;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Producto", mappedBy="sucursal")
+     */
+
+    protected $productos; 
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Canje", mappedBy="sucursal")
+     */
+
+    protected $canjes;     
+    
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->areas = new ArrayCollection();
+        $this->productos = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
 
   
-
     /**
      * Get id
      *
@@ -380,36 +394,26 @@ class Sucursal
     }
 
     /**
-     * Add areas
+     * Set centro
      *
-     * @param \Backend\AdminBundle\Entity\AreaTrabajo $areas
+     * @param \Backend\AdminBundle\Entity\Centro $centro
      * @return Sucursal
      */
-    public function addArea(\Backend\AdminBundle\Entity\AreaTrabajo $areas)
+    public function setCentro(\Backend\AdminBundle\Entity\Centro $centro = null)
     {
-        $this->areas[] = $areas;
+        $this->centro = $centro;
     
         return $this;
     }
 
     /**
-     * Remove areas
+     * Get centro
      *
-     * @param \Backend\AdminBundle\Entity\AreaTrabajo $areas
+     * @return \Backend\AdminBundle\Entity\Centro 
      */
-    public function removeArea(\Backend\AdminBundle\Entity\AreaTrabajo $areas)
+    public function getCentro()
     {
-        $this->areas->removeElement($areas);
-    }
-
-    /**
-     * Get areas
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAreas()
-    {
-        return $this->areas;
+        return $this->centro;
     }
 
     /**
@@ -433,5 +437,71 @@ class Sucursal
     public function getIsDelete()
     {
         return $this->isDelete;
+    }
+
+    /**
+     * Add productos
+     *
+     * @param \Backend\AdminBundle\Entity\Producto $productos
+     * @return Sucursal
+     */
+    public function addProducto(\Backend\AdminBundle\Entity\Producto $productos)
+    {
+        $this->productos[] = $productos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param \Backend\AdminBundle\Entity\Producto $productos
+     */
+    public function removeProducto(\Backend\AdminBundle\Entity\Producto $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * Add canjes
+     *
+     * @param \Backend\AdminBundle\Entity\Canje $canjes
+     * @return Sucursal
+     */
+    public function addCanje(\Backend\AdminBundle\Entity\Canje $canjes)
+    {
+        $this->canjes[] = $canjes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove canjes
+     *
+     * @param \Backend\AdminBundle\Entity\Canje $canjes
+     */
+    public function removeCanje(\Backend\AdminBundle\Entity\Canje $canjes)
+    {
+        $this->canjes->removeElement($canjes);
+    }
+
+    /**
+     * Get canjes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCanjes()
+    {
+        return $this->canjes;
     }
 }

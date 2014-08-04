@@ -16,8 +16,9 @@ $("#validar").click(function() {
                 }
                 else{
 					console.log(data.id);
-					console.log(data.modelo);	
-					$('#backend_adminbundle_modeloNuevo').html("hola");
+					console.log(data.modelo);
+					$('#crear').removeAttr("disabled");	
+					$('#backend_adminbundle_canje_modeloNuevo').html(data.modelo);
 					$('#backend_adminbundle_canje_productoNuevo').val(data.id);
 				}       
                  

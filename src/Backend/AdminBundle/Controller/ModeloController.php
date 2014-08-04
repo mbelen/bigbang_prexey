@@ -285,8 +285,8 @@ class ModeloController extends Controller
         $excelService->excelObj->setActiveSheetIndex(0)
                     ->setCellValue('A1', 'Nombre')
                     ->setCellValue('B1', 'Nombre Fábrica')
-                    ->setCellValue('C1', 'Variante')
-                    ->setCellValue('D1', 'Marca')
+                    ->setCellValue('C1', 'Legacy')
+                    
                     ;
                     
         $resultados=$query->getResult();

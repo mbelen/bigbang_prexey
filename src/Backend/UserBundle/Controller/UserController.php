@@ -338,8 +338,8 @@ class UserController extends Controller
         $usuario=array();
         $usuario["email"] = $this->getRequest()->get("email", null);
         $usuario["username"] = $this->getRequest()->get("username", null);
-    		$usuario["password"] = $this->getRequest()->get("password", null);
-    		$usuario["name"] = $this->getRequest()->get("name", null);
+    	$usuario["password"] = $this->getRequest()->get("password", null);
+    	$usuario["name"] = $this->getRequest()->get("name", null);
         $usuario["lastname"] = $this->getRequest()->get("lastname", null);
         $usuario["empleado"] = $this->getRequest()->get("empleado", null);
         $usuario["role"]=$this->container->getParameter("role_default");
@@ -504,10 +504,10 @@ class UserController extends Controller
       	if ($respuesta->status == 0) //se activo la cuenta
     		{
     		  $em = $this->getDoctrine()->getManager();
-          $empresa = $em->getRepository('BackendUserBundle:Seteo')->findOneByName("empresa");
+			  $empresa = $em->getRepository('BackendUserBundle:Seteo')->findOneByName("empresa");
     		  $email_site = $em->getRepository('BackendUserBundle:Seteo')->findOneByName("email");
     		  
-          $message = \Swift_Message::newInstance()
+			  $message = \Swift_Message::newInstance()
                     ->setSubject("Activo su cuenta para el sitio ".$empresa->getValue())
                     ->setFrom($email_site->getValue())
                     ->setTo($respuesta->email)
@@ -521,7 +521,7 @@ class UserController extends Controller
         
          
           $this->get('mailer')->send($message);
-         $this->get('session')->getFlashBag()->add('success' , 'Se ha activado su cuenta correctamente.');  
+		  $this->get('session')->getFlashBag()->add('success' , 'Se ha activado su cuenta correctamente.');  
     		}
     	else{
           $this->get('session')->getFlashBag()->add('error' , 'No se ha podido activar la cuenta.');

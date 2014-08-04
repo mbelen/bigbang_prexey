@@ -51,9 +51,9 @@
                 <td>{{ canje.sucursal.nombre|capitalize }}</td>
                 <td>{{ canje.createdAt|date('d-m-Y h:m:s')}}</td>
                 <td>{{ canje.imeiLegacy }}</td>
-                <td>{{ canje.modeloLegacy.name }}</td>
+                <td>{{ canje.modeloLegacy.getName }}</td>
                 <td>{{ canje.ImeiNuevo }}</td>
-                <td>{{ canje.productoNuevo.modelo.name }}</td>
+                <td>{{ canje.productoNuevo.getModelo.getName }}</td>
                 <td></td>
                 <td>
                 {% if is_granted("ROLE_DELMODELO") %}
