@@ -91,15 +91,29 @@ class Sucursal
     protected $areas;    
 
      /**
+     * @ORM\OneToMany(targetEntity="\Backend\UserBundle\Entity\User", mappedBy="sucursal")
+     */
+     private $usuarios;
+
+     /**
      * @ORM\Column(name="is_delete", type="boolean" )
      */
     private $isDelete;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="\Backend\AdminBundle\Entity\Centro", inversedBy="sucursales")
+     * @ORM\JoinColumn(name="centro_id", referencedColumnName="id")
+     */
+     private $centro;
+    
+    
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->areas = new ArrayCollection();
+        $this->usuarios = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
@@ -433,5 +447,61 @@ class Sucursal
     public function getIsDelete()
     {
         return $this->isDelete;
+    }
+
+    /**
+     * Add usuarios
+     *
+     * @param \Backend\UserBundle\Entity\User $usuarios
+     * @return Sucursal
+     */
+    public function addUsuario(\Backend\UserBundle\Entity\User $usuarios)
+    {
+        $this->usuarios[] = $usuarios;
+    
+        return $this;
+    }
+
+    /**
+     * Remove usuarios
+     *
+     * @param \Backend\UserBundle\Entity\User $usuarios
+     */
+    public function removeUsuario(\Backend\UserBundle\Entity\User $usuarios)
+    {
+        $this->usuarios->removeElement($usuarios);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    /**
+     * Set centro
+     *
+     * @param \Backend\AdminBundle\Entity\Centro $centro
+     * @return Sucursal
+     */
+    public function setCentro(\Backend\AdminBundle\Entity\Centro $centro = null)
+    {
+        $this->centro = $centro;
+    
+        return $this;
+    }
+
+    /**
+     * Get centro
+     *
+     * @return \Backend\AdminBundle\Entity\Centro 
+     */
+    public function getCentro()
+    {
+        return $this->centro;
     }
 }

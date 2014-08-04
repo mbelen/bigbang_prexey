@@ -3,12 +3,12 @@
 {% block container %}
     
     
-        <h4>Listado de Productos </h4>
+        <h4>Listado de Equipos </h4>
 
 <div class="row-fluid">
   
   
-  <div class="span2">  {% if is_granted("ROLE_ADDARTICULO") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('producto_new') }}" >Nuevo Producto</button> {% endif %} </div>
+  <div class="span2">  {% if is_granted("ROLE_ADDPRODUCTO") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('producto_new') }}" >Nuevo Equipo</button> {% endif %} </div>
   
     <div class="span3">
      
@@ -24,7 +24,7 @@
     </div>
     
      <div class="span2">
-          {% if is_granted("ROLE_VIEWARTICULO") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('producto_exportar') }}" >Exportar </button> {% endif %}
+          {% if is_granted("ROLE_VIEWPRODUCTO") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('producto_exportar') }}" >Exportar </button> {% endif %}
     </div>
     
  </div>
@@ -66,10 +66,10 @@
                   {% endif%}</td>
                                 
                 <td>
-                {% if is_granted("ROLE_MODARTICULO") %}
+                {% if is_granted("ROLE_MODPRODUCTO") %}
                 <a href="{{ path('producto_edit', { 'id': producto.id }) }}"><i class="icon-pencil"></i></a>
                 {% endif %}
-                 {% if is_granted("ROLE_DELARTICULO") %}
+                 {% if is_granted("ROLE_DELPRODUCTO") %}
                 
                 <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ producto.id }} ><i class="icon-remove"></i></a>
                 

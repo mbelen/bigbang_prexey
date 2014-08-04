@@ -36,7 +36,7 @@ class CentroController extends Controller
      */
     public function indexAction(Request $request,$search)
     {
-       if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
+       if ( $this->get('security.context')->isGranted('ROLE_VIEWCENTRO')) {
         $em = $this->getDoctrine()->getManager();
         
         $dql=$this->generateSQL($search);
@@ -66,7 +66,7 @@ class CentroController extends Controller
      */
     public function createAction(Request $request)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
+        if ( $this->get('security.context')->isGranted('ROLE_ADDCENTRO')) {
         $entity  = new Centro();
         $form = $this->createForm(new CentroType(), $entity);
         $form->bind($request);
@@ -116,7 +116,7 @@ class CentroController extends Controller
      */
     public function newAction()
     {
-       if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
+       if ( $this->get('security.context')->isGranted('ROLE_ADDCENTRO')) {
         $entity = new Centro();
         $form   = $this->createForm(new CentroType(), $entity);
 
@@ -137,14 +137,14 @@ class CentroController extends Controller
      */
     public function editAction($id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_MODCENTRO')) { 
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BackendAdminBundle:Centro')->find($id);
 
         if (!$entity) {
             
-             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado la sucursal .');
+             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el centro .');
              return $this->redirect($this->generateUrl('centro'));
         }
 
@@ -186,7 +186,7 @@ class CentroController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) {  
+        if ( $this->get('security.context')->isGranted('ROLE_MODCENTRO')) {  
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BackendAdminBundle:Centro')->find($id);
@@ -203,7 +203,7 @@ class CentroController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-             $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos de la sucursal.');
+             $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos del centro.');
             return $this->redirect($this->generateUrl('centro_edit', array('id' => $id)));
         }
 
@@ -223,7 +223,7 @@ class CentroController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_DELSUCURSAL')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_DELCENTRO')) { 
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -232,7 +232,7 @@ class CentroController extends Controller
             $entity = $em->getRepository('BackendAdminBundle:Centro')->find($id);
 
             if (!$entity) {
-                $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado la sucursal.');
+                $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el centro.');
              
             }
            else{
@@ -244,7 +244,7 @@ class CentroController extends Controller
             
            
             
-            $this->get('session')->getFlashBag()->add('success' , 'Se han borrado los datos de la sucursal.');
+            $this->get('session')->getFlashBag()->add('success' , 'Se han borrado los datos del centro.');
             
             }
         }
@@ -272,7 +272,7 @@ class CentroController extends Controller
     
      public function exportarAction(Request $request)
     {
-     if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
+     if ( $this->get('security.context')->isGranted('ROLE_VIEWCENTRO')) {
          
          $em = $this->getDoctrine()->getManager();
 
@@ -318,7 +318,7 @@ class CentroController extends Controller
           $i++;
         }
                             
-        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Choferes');
+        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Centros');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $excelService->excelObj->setActiveSheetIndex(0);
         $excelService->excelObj->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);

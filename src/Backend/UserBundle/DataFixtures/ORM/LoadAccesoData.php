@@ -49,7 +49,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
         $this->addReference('seteos', $accesoAdmin5);
         
-        $accesoAdmin6 = new Acceso();
+       /* $accesoAdmin6 = new Acceso();
         $accesoAdmin6->setName('Nuevo Cliente');
         $accesoAdmin6->setAcceso('ROLE_ADDCLIENTE');
         $manager->persist($accesoAdmin6);
@@ -75,7 +75,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $accesoAdmin9->setAcceso('ROLE_DELCLIENTE');
         $manager->persist($accesoAdmin9);
         $manager->flush();
-        $this->addReference('del-cliente', $accesoAdmin9);
+        $this->addReference('del-cliente', $accesoAdmin9);*/
         
         $accesoAdmin10 = new Acceso();
         $accesoAdmin10->setName('Nueva Sucursal');
@@ -105,7 +105,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
         $this->addReference('del-sucursal', $accesoAdmin13);
         
-        $accesoAdmin14 = new Acceso();
+       /* $accesoAdmin14 = new Acceso();
         $accesoAdmin14->setName('Nueva Marca');
         $accesoAdmin14->setAcceso('ROLE_ADDMARCA');
         $manager->persist($accesoAdmin14);
@@ -131,7 +131,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $accesoAdmin17->setAcceso('ROLE_DELMARCA');
         $manager->persist($accesoAdmin17);
         $manager->flush();
-        $this->addReference('del-marca', $accesoAdmin17);
+        $this->addReference('del-marca', $accesoAdmin17);*/
         
         $accesoAdmin18 = new Acceso();
         $accesoAdmin18->setName('Nuevo Modelo');
@@ -161,7 +161,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
         $this->addReference('del-modelo', $accesoAdmin21);
         
-        $accesoAdmin22= new Acceso();
+       /* $accesoAdmin22= new Acceso();
         $accesoAdmin22->setName('Nuevo Sintoma');
         $accesoAdmin22->setAcceso('ROLE_ADDSINTOMA');
         $manager->persist($accesoAdmin22);
@@ -187,7 +187,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $accesoAdmin25->setAcceso('ROLE_DELSINTOMA');
         $manager->persist($accesoAdmin25);
         $manager->flush();
-        $this->addReference('del-sintoma', $accesoAdmin25);
+        $this->addReference('del-sintoma', $accesoAdmin25);*/
         
         $accesoAdmin26= new Acceso();
         $accesoAdmin26->setName('Nueva Provincia');
@@ -245,7 +245,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
         $this->addReference('del-zona', $accesoAdmin33);
         
-        $accesoAdmin34= new Acceso();
+        /*$accesoAdmin34= new Acceso();
         $accesoAdmin34->setName('Nuevo Artículo');
         $accesoAdmin34->setAcceso('ROLE_ADDARTICULO');
         $manager->persist($accesoAdmin34);
@@ -327,7 +327,93 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $accesoAdmin45->setAcceso('ROLE_DELTIPOORDENING');
         $manager->persist($accesoAdmin45);
         $manager->flush();
-        $this->addReference('del-tipo-orden-ingreso', $accesoAdmin45);        
+        $this->addReference('del-tipo-orden-ingreso', $accesoAdmin45); */
+        
+        $accesoAdmin46 = new Acceso();
+        $accesoAdmin46->setName('Nuevo Centro');
+        $accesoAdmin46->setAcceso('ROLE_ADDCENTRO');
+        $manager->persist($accesoAdmin46);
+        $manager->flush();
+        $this->addReference('add-centro', $accesoAdmin46);
+        
+        $accesoAdmin47 = new Acceso();
+        $accesoAdmin47->setName('Listar Centros');
+        $accesoAdmin47->setAcceso('ROLE_VIEWCENTRO');
+        $manager->persist($accesoAdmin47);
+        $manager->flush();
+        $this->addReference('view-centro', $accesoAdmin47);
+        
+        $accesoAdmin48 = new Acceso();
+        $accesoAdmin48->setName('Modificar Centro');
+        $accesoAdmin48->setAcceso('ROLE_MODCENTRO');
+        $manager->persist($accesoAdmin48);
+        $manager->flush();
+        $this->addReference('mod-centro', $accesoAdmin48);
+        
+        $accesoAdmin49 = new Acceso();
+        $accesoAdmin49->setName('Borrar centro');
+        $accesoAdmin49->setAcceso('ROLE_DELCENTRO');
+        $manager->persist($accesoAdmin49);
+        $manager->flush();
+        $this->addReference('del-centro', $accesoAdmin49);
+        
+        $accesoAdmin50 = new Acceso();
+        $accesoAdmin50->setName('Nuevo Equipo');
+        $accesoAdmin50->setAcceso('ROLE_ADDPRODUCTO');
+        $manager->persist($accesoAdmin50);
+        $manager->flush();
+        $this->addReference('add-producto', $accesoAdmin50);
+        
+        $accesoAdmin51 = new Acceso();
+        $accesoAdmin51->setName('Listar Equipos');
+        $accesoAdmin51->setAcceso('ROLE_VIEWPRODUCTO');
+        $manager->persist($accesoAdmin51);
+        $manager->flush();
+        $this->addReference('view-producto', $accesoAdmin51);
+        
+        $accesoAdmin52 = new Acceso();
+        $accesoAdmin52->setName('Modificar Equipo');
+        $accesoAdmin52->setAcceso('ROLE_MODPRODUCTO');
+        $manager->persist($accesoAdmin52);
+        $manager->flush();
+        $this->addReference('mod-producto', $accesoAdmin52);
+        
+        $accesoAdmin53 = new Acceso();
+        $accesoAdmin53->setName('Borrar Equipo');
+        $accesoAdmin53->setAcceso('ROLE_DELPRODUCTO');
+        $manager->persist($accesoAdmin53);
+        $manager->flush();
+        $this->addReference('del-producto', $accesoAdmin53);
+        
+        $accesoAdmin54 = new Acceso();
+        $accesoAdmin54->setName('Nuevo Canje');
+        $accesoAdmin54->setAcceso('ROLE_ADDCANJE');
+        $manager->persist($accesoAdmin54);
+        $manager->flush();
+        $this->addReference('add-canje', $accesoAdmin54);
+        
+        $accesoAdmin55 = new Acceso();
+        $accesoAdmin55->setName('Listar Canjes');
+        $accesoAdmin55->setAcceso('ROLE_VIEWCANJE');
+        $manager->persist($accesoAdmin55);
+        $manager->flush();
+        $this->addReference('view-canje', $accesoAdmin55);
+        
+        /*$accesoAdmin56 = new Acceso();
+        $accesoAdmin56->setName('Modificar Canje');
+        $accesoAdmin56->setAcceso('ROLE_MODCANJE');
+        $manager->persist($accesoAdmin56);
+        $manager->flush();
+        $this->addReference('mod-canje', $accesoAdmin56);*/
+        
+        $accesoAdmin57 = new Acceso();
+        $accesoAdmin57->setName('Borrar Canje');
+        $accesoAdmin57->setAcceso('ROLE_DELPRODUCTO');
+        $manager->persist($accesoAdmin57);
+        $manager->flush();
+        $this->addReference('del-canje', $accesoAdmin57);
+        
+                
     }
 
     /**

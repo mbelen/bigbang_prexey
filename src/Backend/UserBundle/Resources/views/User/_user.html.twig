@@ -71,6 +71,27 @@
   <div id='backend_userbundle_usertype_groups_errorloc' class="help-inline error" >{{ form_errors(form.groups) }}</div>  
 </div>
 </div>  
+
+<div class="control-group" id="list_centros" style="display: none;" >
+
+{{ form_label(form.centro,"Centro", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.centro, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+  <div id='backend_userbundle_usertype_centro_errorloc' class="help-inline error" >{{ form_errors(form.centro) }}</div>  
+</div>
+</div>
+
+
+<div class="control-group" id="list_sucursales" style="display: none;">
+
+{{ form_label(form.sucursal,"Sucursal", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.sucursal, { 'attr': {'class': 'input-xlarge'} }) }}
+    
+  <div id='backend_userbundle_usertype_sucursal_errorloc' class="help-inline error" >{{ form_errors(form.sucursal) }}</div>  
+</div>
+</div>
      
  <div class="control-group">
 

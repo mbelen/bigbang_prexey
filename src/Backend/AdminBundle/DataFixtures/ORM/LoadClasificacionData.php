@@ -5,7 +5,7 @@ namespace Backend\AdminBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Backend\UserBundle\Entity\Clasificacion;
+use Backend\AdminBundle\Entity\Clasificacion;
 
 class LoadClasificacionData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -17,6 +17,7 @@ class LoadClasificacionData extends AbstractFixture implements OrderedFixtureInt
         $seteoClasificacion = new Clasificacion();
         $seteoClasificacion->setName('Legacy for Bigbang');
         $seteoClasificacion->setCreatedAt(new \DateTime('now'));
+        $seteoClasificacion->setIsDelete(false);
         $manager->persist($seteoClasificacion);
         $manager->flush();
         $this->addReference('legacy-bigbang', $seteoClasificacion);
@@ -24,6 +25,7 @@ class LoadClasificacionData extends AbstractFixture implements OrderedFixtureInt
         $seteoClasificacion = new Clasificacion();
         $seteoClasificacion->setName('Legacy for Exceptcion');
         $seteoClasificacion->setCreatedAt(new \DateTime('now'));
+        $seteoClasificacion->setIsDelete(false);
         $manager->persist($seteoClasificacion);
         $manager->flush();
         $this->addReference('legacy-exception', $seteoClasificacion);       

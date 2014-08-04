@@ -8,7 +8,7 @@
 <div class="row-fluid">
   
   
-  <div class="span2">  {% if is_granted("ROLE_ADDSUCURSAL") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('centro_new') }}" >Nuevo Centro</button> {% endif %} </div>
+  <div class="span2">  {% if is_granted("ROLE_ADDCENTRO") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('centro_new') }}" >Nuevo Centro</button> {% endif %} </div>
   
     <div class="span3">
      
@@ -24,7 +24,7 @@
     </div>
     
      <div class="span2">
-          {% if is_granted("ROLE_VIEWSUCURSAL") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('centro_exportar') }}" >Exportar </button> {% endif %}
+          {% if is_granted("ROLE_VIEWCENTRO") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('centro_exportar') }}" >Exportar </button> {% endif %}
     </div>
     
  </div>
@@ -56,10 +56,10 @@
                 <td>{{ centro.fax }}</td>
                 <td>{{ centro.email }} </td>
                 <td>
-                {% if is_granted("ROLE_MODSUCURSAL") %}
+                {% if is_granted("ROLE_MODCENTRO") %}
                 <a href="{{ path('centro_edit', { 'id': centro.id }) }}"><i class="icon-pencil"></i></a>
                 {% endif %}
-                 {% if is_granted("ROLE_DELSUCURSAL") %}
+                 {% if is_granted("ROLE_DELCENTRO") %}
                 
                 <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ centro.id }} ><i class="icon-remove"></i></a>
                 
@@ -85,10 +85,10 @@
      </div>
      <div class="modal-body">
        <p class="error-text">Esta seguro que desea borrar los datos del centro?</p>
-     </div>
+|     </div>
      <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-      <button class="btn btn-danger " data-id="0"  data-url="{{ path('sucursal_delete', { 'id': 'id' }) }}">Borrar</button>
+      <button class="btn btn-danger " data-id="0"  data-url="{{ path('centro_delete', { 'id': 'id' }) }}">Borrar</button>
      </div>
     </div>
     

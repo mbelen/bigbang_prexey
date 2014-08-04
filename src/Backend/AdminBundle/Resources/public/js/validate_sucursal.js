@@ -24,8 +24,8 @@ $(document).ready(function() {
 					number: true,
 				},
 				"backend_adminbundle_sucursal[piso]": {
-					required:false,
-          			minlength:1,
+					required:true,
+          minlength:1,
 					maxlength:3,					
 				},
 				"backend_adminbundle_sucursal[cp]": {

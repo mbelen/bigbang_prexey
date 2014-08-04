@@ -17,14 +17,29 @@ class ProductoController extends Controller
 
      public function generateSQL($search){
      
-        $dql="SELECT u FROM BackendAdminBundle:Producto u where u.isDelete=false"  ;
+        $dql="SELECT u FROM BackendAdminBundle:Producto u "  ;
+        
+        $where=" where u.isDelete=false ";
+        
+        if ( $this->get('security.context')->isGranted($this->container->getParameter('role_centro'))){
+           $dql.=" JOIN u.sucursal s JOIN s.centro c"    ;
+           $where.=" and c.id = ".$this->getUser()->getCentro()->getId();
+        }
+        
+        if ( $this->get('security.context')->isGranted($this->container->getParameter('role_sucursal'))){
+           $dql.=" JOIN u.sucursal s "    ;
+           $where.=" and s.id = ".$this->getUser()->getSucursal()->getId();
+        }
+
+        
         $search=mb_convert_case($search,MB_CASE_LOWER);
         
        
         if ($search)
-          $dql.=" and u.imei like '%$search%' ";
+          $where.=" and u.imei like '%$search%' ";
           
-        $dql .=" order by u.imei"; 
+          
+        $dql .=$where." order by u.imei"; 
         
         return $dql;
      
@@ -36,7 +51,7 @@ class ProductoController extends Controller
      */
     public function indexAction(Request $request,$search)
     {
-       if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
+       if ( $this->get('security.context')->isGranted('ROLE_VIEWPRODUCTO')) {
         $em = $this->getDoctrine()->getManager();
         
         $dql=$this->generateSQL($search);
@@ -66,9 +81,9 @@ class ProductoController extends Controller
      */
     public function createAction(Request $request)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
+        if ( $this->get('security.context')->isGranted('ROLE_ADDPRODUCTO')) {
         $entity  = new Producto();
-        $form = $this->createForm(new ProductoType(), $entity);
+        $form = $this->createForm(new ProductoType($this->get('security.context')), $entity);
         $form->bind($request);
          
         if ($form->isValid()) {
@@ -100,7 +115,7 @@ class ProductoController extends Controller
     */
     private function createCreateForm(Producto $entity)
     {
-        $form = $this->createForm(new ProductoType(), $entity, array(
+        $form = $this->createForm(new ProductoType($this->get('security.context')), $entity, array(
             'action' => $this->generateUrl('producto_create'),
             'method' => 'POST',
         ));
@@ -116,9 +131,9 @@ class ProductoController extends Controller
      */
     public function newAction()
     {
-       if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
+       if ( $this->get('security.context')->isGranted('ROLE_ADDPRODUCTO')) {
         $entity = new Producto();
-        $form   = $this->createForm(new ProductoType(), $entity);
+        $form   = $this->createForm(new ProductoType($this->get('security.context')), $entity);
 
         return $this->render('BackendAdminBundle:Producto:new.html.twig', array(
             'entity' => $entity,
@@ -137,7 +152,7 @@ class ProductoController extends Controller
      */
     public function editAction($id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_MODPRODUCTO')) { 
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BackendAdminBundle:Producto')->find($id);
@@ -148,7 +163,7 @@ class ProductoController extends Controller
              return $this->redirect($this->generateUrl('producto'));
         }
 
-        $editForm = $this->createForm(new ProductoType(), $entity);
+        $editForm = $this->createForm(new ProductoType($this->get('security.context')), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BackendAdminBundle:Producto:edit.html.twig', array(
@@ -171,7 +186,7 @@ class ProductoController extends Controller
     */
     private function createEditForm(Producto $entity)
     {
-        $form = $this->createForm(new ProductoType(), $entity, array(
+        $form = $this->createForm(new ProductoType($this->get('security.context')), $entity, array(
             'action' => $this->generateUrl('producto_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -186,7 +201,7 @@ class ProductoController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) {  
+        if ( $this->get('security.context')->isGranted('ROLE_MODPRODUCTO')) {  
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BackendAdminBundle:Producto')->find($id);
@@ -197,7 +212,7 @@ class ProductoController extends Controller
         }
 
        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ProductoType(), $entity);
+        $editForm = $this->createForm(new ProductoType($this->get('security.context')), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -223,7 +238,7 @@ class ProductoController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_DELSUCURSAL')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_DELPRODUCTO')) { 
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -272,7 +287,7 @@ class ProductoController extends Controller
     
      public function exportarAction(Request $request)
     {
-     if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
+     if ( $this->get('security.context')->isGranted('ROLE_VIEWPRODUCTO')) {
          
          $em = $this->getDoctrine()->getManager();
 
@@ -310,7 +325,7 @@ class ProductoController extends Controller
           $i++;
         }
                             
-        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Choferes');
+        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Equipos');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $excelService->excelObj->setActiveSheetIndex(0);
         $excelService->excelObj->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);

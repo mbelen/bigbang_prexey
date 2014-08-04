@@ -28,12 +28,41 @@ class UserType extends AbstractType
                 'property'=>'name',
                 'multiple'=>true
             ));
+            
+            $builder->add('centro','entity',array(
+                'class'=>'BackendAdminBundle:Centro',
+                'empty_value' => 'Seleccione una opción',
+                'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                        ->where('u.isDelete = :delete')
+                         ->setParameter('delete',false)
+                         ->orderBy('u.nombre', 'ASC');
+            },
+                'property'=>'nombre',
+                'multiple'=>false //un solo deposito por operario
+            ));
+            
+            $builder->add('sucursal','entity',array(
+                'class'=>'BackendAdminBundle:Sucursal',
+                 'empty_value' => 'Seleccione una opción',
+                'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                        ->where('u.isDelete = :delete')
+                         ->setParameter('delete',false)
+                         ->orderBy('u.nombre', 'ASC');
+            },
+                'property'=>'nombre',
+                'multiple'=>false //un solo deposito por operario
+            ));
           
             $builder->add('is_active','checkbox',array(
              'value'=>1,
              'label'=>"Activo",
              'required'=>false
             ));
+            
+            
+            
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

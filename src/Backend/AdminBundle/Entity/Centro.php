@@ -90,6 +90,11 @@ class Centro
 
     protected $sucursales;    
 
+    /**
+     * @ORM\OneToMany(targetEntity="\Backend\UserBundle\Entity\User", mappedBy="centro")
+     */
+     private $usuarios;
+
      /**
      * @ORM\Column(name="is_delete", type="boolean" )
      */
@@ -100,6 +105,7 @@ class Centro
     public function __construct()
     {
         $this->sucursales = new ArrayCollection();
+        $this->usuarios = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
@@ -456,5 +462,38 @@ class Centro
     public function removeSucursale(\Backend\AdminBundle\Entity\Sucursal $sucursales)
     {
         $this->sucursales->removeElement($sucursales);
+    }
+
+    /**
+     * Add usuarios
+     *
+     * @param \Backend\UserBundle\Entity\User $usuarios
+     * @return Centro
+     */
+    public function addUsuario(\Backend\UserBundle\Entity\User $usuarios)
+    {
+        $this->usuarios[] = $usuarios;
+    
+        return $this;
+    }
+
+    /**
+     * Remove usuarios
+     *
+     * @param \Backend\UserBundle\Entity\User $usuarios
+     */
+    public function removeUsuario(\Backend\UserBundle\Entity\User $usuarios)
+    {
+        $this->usuarios->removeElement($usuarios);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
     }
 }

@@ -21,10 +21,21 @@ class CanjeController extends Controller
         //$dql="SELECT u FROM BackendAdminBundle:Canje u where u.isDelete=false"  ;
         
         $dql="SELECT c FROM BackendAdminBundle:Canje c 
-			  JOIN c.productoNuevo p where c.isDelete=false"  ;
-                       
+			  JOIN c.productoNuevo p "  ;
+        $where=" where c.isDelete=false ";               
         $search=mb_convert_case($search,MB_CASE_LOWER);
         
+         if ( $this->get('security.context')->isGranted($this->container->getParameter('role_centro'))){
+           $dql.=" JOIN c.sucursal s JOIN s.centro e "    ;
+           $where.=" and e.id = ".$this->getUser()->getCentro()->getId();
+        }
+        
+        if ( $this->get('security.context')->isGranted($this->container->getParameter('role_sucursal'))){
+           $dql.=" JOIN c.sucursal s "    ;
+           $where.=" and s.id = ".$this->getUser()->getSucursal()->getId();
+        }
+        
+        $dql.=$where;
        /*
         if ($search)
           $dql.=" and u.imei like '%$search%' ";
@@ -41,7 +52,7 @@ class CanjeController extends Controller
      */
     public function indexAction(Request $request,$search)
     {
-       if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
+       if ( $this->get('security.context')->isGranted('ROLE_VIEWCANJE')) {
         $em = $this->getDoctrine()->getManager();
         
         $dql=$this->generateSQL($search);
@@ -71,9 +82,9 @@ class CanjeController extends Controller
      */
     public function createAction(Request $request)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
+        if ( $this->get('security.context')->isGranted('ROLE_ADDCANJE')) {
         $entity  = new Canje();
-        $form = $this->createForm(new CanjeType(), $entity);
+        $form = $this->createForm(new CanjeType($this->get('security.context')), $entity);
         $form->bind($request);
          
         if ($form->isValid()) {
@@ -88,7 +99,7 @@ class CanjeController extends Controller
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success' , 'Se ha agregado un nuevo canje.');
-            return $this->redirect($this->generateUrl('canje_edit', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('canje', array('id' => $entity->getId())));
         }
         
         
@@ -112,7 +123,7 @@ class CanjeController extends Controller
     */
     private function createCreateForm(Canje $entity)
     {
-        $form = $this->createForm(new CanjeType(), $entity, array(
+        $form = $this->createForm(new CanjeType($this->get('security.context')), $entity, array(
             'action' => $this->generateUrl('canje_create'),
             'method' => 'POST',
         ));
@@ -128,9 +139,9 @@ class CanjeController extends Controller
      */
     public function newAction()
     {
-       if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
+       if ( $this->get('security.context')->isGranted('ROLE_ADDCANJE')) {
         $entity = new Canje();
-        $form   = $this->createForm(new CanjeType(), $entity);
+        $form   = $this->createForm(new CanjeType($this->get('security.context')), $entity);
 
         return $this->render('BackendAdminBundle:Canje:new.html.twig', array(
             'entity' => $entity,
@@ -149,7 +160,7 @@ class CanjeController extends Controller
      */
     public function editAction($id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_MODCANJE')) { 
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);
@@ -160,7 +171,7 @@ class CanjeController extends Controller
              return $this->redirect($this->generateUrl('canje'));
         }
 
-        $editForm = $this->createForm(new CanjeType(), $entity);
+        $editForm = $this->createForm(new CanjeType($this->get('security.context')), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BackendAdminBundle:Canje:edit.html.twig', array(
@@ -183,7 +194,7 @@ class CanjeController extends Controller
     */
     private function createEditForm(Canje $entity)
     {
-        $form = $this->createForm(new CanjeType(), $entity, array(
+        $form = $this->createForm(new CanjeType($this->get('security.context')), $entity, array(
             'action' => $this->generateUrl('canje_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -198,7 +209,7 @@ class CanjeController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODSUCURSAL')) {  
+        if ( $this->get('security.context')->isGranted('ROLE_MODCANJE')) {  
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('BackendAdminBundle:Canje')->find($id);
@@ -209,7 +220,7 @@ class CanjeController extends Controller
         }
 
        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new CanjeType(), $entity);
+        $editForm = $this->createForm(new CanjeType($this->get('security.context')), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
@@ -235,7 +246,7 @@ class CanjeController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_DELSUCURSAL')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_DELCANJE')) { 
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
@@ -308,7 +319,7 @@ class CanjeController extends Controller
     
      public function exportarAction(Request $request)
     {
-     if ( $this->get('security.context')->isGranted('ROLE_VIEWSUCURSAL')) {
+     if ( $this->get('security.context')->isGranted('ROLE_VIEWCANJE')) {
          
          $em = $this->getDoctrine()->getManager();
 

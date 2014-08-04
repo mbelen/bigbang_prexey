@@ -30,32 +30,33 @@
                     </li>
                     {% endif %}
                     
-                    {% if  is_granted('ROLE_VIEWCLIENTE') or is_granted('ROLE_VIEWSUCURSAL') or
-                       is_granted('ROLE_VIEWMARCA') or  is_granted('ROLE_VIEWMODELO') or 
-                       is_granted('ROLE_VIEWSINTOMA') or is_granted('ROLE_VIEWTIPOARTICULO')
-                       or is_granted('ROLE_VIEWARTICULO')
+                    {% if  is_granted('ROLE_VIEWSUCURSAL') or
+                        is_granted('ROLE_VIEWMODELO') or 
+                        is_granted('ROLE_VIEWPRODUCTO' or is_granted('ROLE_VIEWCENTRO'))
                      %}
                     
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entidades<b class="caret"></b></a>
                       <ul class="dropdown-menu" >
-                       {% if is_granted('ROLE_VIEWSUCURSAL') %}
+                       {% if is_granted('ROLE_VIEWCENTRO') %}
                         <li> <a href="{{ path('centro') }}"> Centros</a> </li>
                        <li class="divider"></li>
+                       {% endif %}
+                       {% if is_granted('ROLE_VIEWSUCURSAL') %}
                        <li> <a href="{{ path('sucursal') }}"> Sucursales</a> </li>
                        <li class="divider"></li>                       
                        {% endif %}
-                       {% if is_granted('ROLE_VIEWTIPOARTICULO') %}
+                       {% if is_granted('ROLE_VIEWMODELO') %}
                        <li> <a href="{{ path('modelo') }}">Modelos</a> </li>
                        <li class="divider"></li>
                        {% endif %}
-                       {% if is_granted('ROLE_VIEWARTICULO') %}
+                       {% if is_granted('ROLE_VIEWPRODUCTO') %}
                        <li> <a href="{{ path('producto') }}">Equipos</a> </li>                       
                        {% endif %}
                       </ul>                      
                     </li>                   
                    
-                       {% if is_granted('ROLE_VIEWCLIENTE') %}
+                       {% if is_granted('ROLE_VIEWCANJE') %}
                        <li> <a href="{{ path('canje') }}"> Canjes</a> </li>
                        {% endif %}
                       
