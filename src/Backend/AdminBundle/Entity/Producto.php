@@ -70,6 +70,10 @@ class Producto
         
     private $origen; 
     
+     /**
+     * @ORM\OneToMany(targetEntity="Canje", mappedBy="productoNuevo")
+     */
+    private $canjes;
     
     /**
      * @ORM\Column(name="is_delete", type="boolean" )
@@ -82,7 +86,7 @@ class Producto
      */
     public function __construct()
     {
-        
+       $this->canjes = new ArrayCollection(); 
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
@@ -319,5 +323,38 @@ class Producto
     public function getOrigen()
     {
         return $this->origen;
+    }
+
+    /**
+     * Add canjes
+     *
+     * @param \Backend\AdminBundle\Entity\Canje $canjes
+     * @return Producto
+     */
+    public function addCanje(\Backend\AdminBundle\Entity\Canje $canjes)
+    {
+        $this->canjes[] = $canjes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove canjes
+     *
+     * @param \Backend\AdminBundle\Entity\Canje $canjes
+     */
+    public function removeCanje(\Backend\AdminBundle\Entity\Canje $canjes)
+    {
+        $this->canjes->removeElement($canjes);
+    }
+
+    /**
+     * Get canjes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCanjes()
+    {
+        return $this->canjes;
     }
 }

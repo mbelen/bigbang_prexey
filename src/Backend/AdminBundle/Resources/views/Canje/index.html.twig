@@ -8,7 +8,7 @@
 <div class="row-fluid">
   
   
-  <div class="span2">  {% if is_granted("ROLE_ADDMODELO") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('canje_new') }}" >Nuevo Canje</button> {% endif %} </div>
+  <div class="span2">  {% if is_granted("ROLE_ADDCANJE") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('canje_new') }}" >Nuevo Canje</button> {% endif %} </div>
   
     <div class="span3">
      
@@ -24,7 +24,7 @@
     </div>
     
      <div class="span2">
-          {% if is_granted("ROLE_VIEWMODELO") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('canje_exportar') }}" >Exportar </button> {% endif %}
+          {% if is_granted("ROLE_VIEWCANJE") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('canje_exportar') }}" >Exportar </button> {% endif %}
     </div>
     
  </div>

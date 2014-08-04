@@ -1,6 +1,34 @@
 $(document).ready(function() {
  
+    var show_centro=0;
+    var show_sucursales=0;
 
+    $("#backend_userbundle_usertype_groups").change(function(){
+    
+    $("#list_centros").hide();
+    show_centro=0;
+    show_sucursales=0;
+      $('#backend_userbundle_usertype_groups option:selected').each(function(){
+    
+        if ( $(this).text() == 'Centro' )
+        {  $("#list_centros").show();
+           show_centro=1;
+        }else{
+            $("#list_centros").hide();
+        } 
+        
+         if ( $(this).text() == 'Sucursal' )
+        {  $("#list_sucursales").show();
+           show_sucursales=1;
+        }else{ 
+            $("#list_sucursales").hide();
+        }    
+        
+        
+    
+    });
+     
+    });
 
   $("#backend_userbundle_usertype_groups").change();
 

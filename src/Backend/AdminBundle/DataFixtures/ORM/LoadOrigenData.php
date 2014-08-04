@@ -1,11 +1,11 @@
 <?php 
 
-namespace Backend\UserBundle\DataFixtures\ORM;
+namespace Backend\AdminBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Backend\UserBundle\Entity\Origen;
+use Backend\AdminBundle\Entity\Origen;
 
 class LoadOrigenData extends AbstractFixture implements OrderedFixtureInterface
 {

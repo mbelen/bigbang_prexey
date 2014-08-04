@@ -78,6 +78,16 @@ class User implements AdvancedUserInterface, \Serializable {
      *
      */
     private $groups;
+    /**
+     * @ORM\ManyToOne(targetEntity="\Backend\AdminBundle\Entity\Centro", inversedBy="usuarios")
+     * @ORM\JoinColumn(name="centro_id", referencedColumnName="id")
+     */
+    private $centro;
+     /**
+     * @ORM\ManyToOne(targetEntity="\Backend\AdminBundle\Entity\Sucursal", inversedBy="usuarios")
+     * @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
+     */
+    private $sucursal;
     
     /**
      * @ORM\Column(name="created_at", type="datetime")
@@ -488,5 +498,51 @@ class User implements AdvancedUserInterface, \Serializable {
     public function getModifiedAt()
     {
         return $this->modifiedAt;
+    }
+
+    /**
+     * Set centro
+     *
+     * @param \Backend\AdminBundle\Entity\Centro $centro
+     * @return User
+     */
+    public function setCentro(\Backend\AdminBundle\Entity\Centro $centro = null)
+    {
+        $this->centro = $centro;
+    
+        return $this;
+    }
+
+    /**
+     * Get centro
+     *
+     * @return \Backend\AdminBundle\Entity\Centro 
+     */
+    public function getCentro()
+    {
+        return $this->centro;
+    }
+
+    /**
+     * Set sucursal
+     *
+     * @param \Backend\AdminBundle\Entity\Sucursal $sucursal
+     * @return User
+     */
+    public function setSucursal(\Backend\AdminBundle\Entity\Sucursal $sucursal = null)
+    {
+        $this->sucursal = $sucursal;
+    
+        return $this;
+    }
+
+    /**
+     * Get sucursal
+     *
+     * @return \Backend\AdminBundle\Entity\Sucursal 
+     */
+    public function getSucursal()
+    {
+        return $this->sucursal;
     }
 }

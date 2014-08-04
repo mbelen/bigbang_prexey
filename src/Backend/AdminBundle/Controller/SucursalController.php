@@ -17,9 +17,11 @@ class SucursalController extends Controller
 
      public function generateSQL($search){
      
-        $dql="SELECT u FROM BackendAdminBundle:Sucursal u where u.isDelete=false"  ;
+        $dql="SELECT u FROM BackendAdminBundle:Sucursal u JOIN u.centro c where u.isDelete=false"  ;
         $search=mb_convert_case($search,MB_CASE_LOWER);
         
+        if ( $this->get('security.context')->isGranted($this->container->getParameter('role_centro')))
+            $dql.="  and c.id = ".$this->getUser()->getCentro()->getId();
        
         if ($search)
           $dql.=" and u.nombre like '%$search%' ";
@@ -68,7 +70,7 @@ class SucursalController extends Controller
     {
         if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
         $entity  = new Sucursal();
-        $form = $this->createForm(new SucursalType(), $entity);
+        $form = $this->createForm(new SucursalType($this->get('security.context')), $entity);
         $form->bind($request);
          
         if ($form->isValid()) {
@@ -100,7 +102,7 @@ class SucursalController extends Controller
     */
     private function createCreateForm(Sucursal $entity)
     {
-        $form = $this->createForm(new SucursalType(), $entity, array(
+        $form = $this->createForm(new SucursalType($this->get('security.context')), $entity, array(
             'action' => $this->generateUrl('sucursal_create'),
             'method' => 'POST',
         ));
@@ -118,7 +120,7 @@ class SucursalController extends Controller
     {
        if ( $this->get('security.context')->isGranted('ROLE_ADDSUCURSAL')) {
         $entity = new Sucursal();
-        $form   = $this->createForm(new SucursalType(), $entity);
+        $form   = $this->createForm(new SucursalType($this->get('security.context')), $entity);
 
         return $this->render('BackendAdminBundle:Sucursal:new.html.twig', array(
             'entity' => $entity,
@@ -148,7 +150,7 @@ class SucursalController extends Controller
              return $this->redirect($this->generateUrl('sucursal'));
         }
 
-        $editForm = $this->createForm(new SucursalType(), $entity);
+        $editForm = $this->createForm(new SucursalType($this->get('security.context')), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BackendAdminBundle:Sucursal:edit.html.twig', array(
@@ -171,7 +173,7 @@ class SucursalController extends Controller
     */
     private function createEditForm(Sucursal $entity)
     {
-        $form = $this->createForm(new SucursalType(), $entity, array(
+        $form = $this->createForm(new SucursalType($this->get('security.context')), $entity, array(
             'action' => $this->generateUrl('sucursal_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -197,7 +199,7 @@ class SucursalController extends Controller
         }
 
        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new SucursalType(), $entity);
+        $editForm = $this->createForm(new SucursalType($this->get('security.context')), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {

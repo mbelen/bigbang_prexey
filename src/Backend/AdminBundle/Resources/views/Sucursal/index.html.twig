@@ -40,6 +40,7 @@
     <th>Teléfono</th>
     <th>Fax</th>
     <th>Email</th>
+    <th>Centro</th>
     <th style="width: 36px;">Acciones</th>
     </tr>
     </thead>
@@ -55,6 +56,7 @@
                 <td>{{ sucursal.telefono }}</td>
                 <td>{{ sucursal.fax }}</td>
                 <td>{{ sucursal.email }} </td>
+                <td>{{ sucursal.centro.getNombre }} </td>
                 <td>
                 {% if is_granted("ROLE_MODSUCURSAL") %}
                 <a href="{{ path('sucursal_edit', { 'id': sucursal.id }) }}"><i class="icon-pencil"></i></a>
