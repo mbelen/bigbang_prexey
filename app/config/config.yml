@@ -66,12 +66,27 @@ services:
             -
                 name: validator.constraint_validator
                 alias: email_unique  
-     
+    backend.form.sucursaltype:
+        class: Backend\AdminBundle\Form\SucursalType
+        arguments: [  "@security.context", "@doctrine.orm.entity_manager"]
+        tags:
+            - { name: "form.type", alias: "backend_adminbundle_sucursaltype" }
+    backend.form.productotype:
+        class: Backend\AdminBundle\Form\ProductoType
+        arguments: [  "@security.context", "@doctrine.orm.entity_manager"]
+        tags:
+            - { name: "form.type", alias: "backend_adminbundle_productotype" }
+    backend.form.canjetype:
+        class: Backend\AdminBundle\Form\CanjeType
+        arguments: [  "@security.context", "@doctrine.orm.entity_manager"]
+        tags:
+            - { name: "form.type", alias: "backend_adminbundle_canjetype" }                         
 parameters:
     max_on_listepage: 20
     role_default: ROLE_VISITOR # este es asignado por default a quien se registra
     role_admin: ROLE_ADMIN  #este debe existir y no puede borrarse 
-    role_deposito: ROLE_DEPOSITO #este es el que se controla para manejar los depositos
+    role_centro: ROLE_CENTRO #controla un centro
+    role_sucursal: ROLE_SUCURSAL
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
