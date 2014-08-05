@@ -34,6 +34,11 @@ class SucursalType extends AbstractType
             ->add('telefono')
             ->add('fax')
             ->add('email')
+            ->add('tipo')
+            ->add('mdoiden')
+            ->add('nivel')
+            ->add('carriers')
+            ->add('masc')
             ->add('centro','entity',array(
                 'class'=>'BackendAdminBundle:Centro',
                 'query_builder' => function(EntityRepository $er) use($security){

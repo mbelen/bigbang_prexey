@@ -90,6 +90,56 @@
 
 <div class="control-group">
 
+{{ form_label(form.tipo,"Tipo", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.tipo, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_tipo_errorloc' class="help-inline error" >{{ form_errors(form.tipo) }}</div>
+  
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.mdoiden,"Mdoiden", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.mdoiden, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_mdoiden_errorloc' class="help-inline error" >{{ form_errors(form.mdoiden) }}</div>
+  
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.nivel,"Nivel", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.nivel, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_nivel_errorloc' class="help-inline error" >{{ form_errors(form.nivel) }}</div>
+  
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.carriers,"Carriers", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.carriers, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_carriers_errorloc' class="help-inline error" >{{ form_errors(form.carriers) }}</div>
+  
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.masc,"Masc", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.masc, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_masc_errorloc' class="help-inline error" >{{ form_errors(form.masc) }}</div>
+  
+</div>
+</div>
+
+<div class="control-group">
+
 {{ form_label(form.centro,"Centro", { 'label_attr': {'class': 'control-label'} }) }}
 <div class="controls">
  {{ form_widget(form.centro, { 'attr': {'class': 'input-xlarge'} }) }}

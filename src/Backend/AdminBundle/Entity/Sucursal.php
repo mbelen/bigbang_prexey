@@ -71,11 +71,36 @@ class Sucursal
      * @ORM\Column(name="email", type="string", length=100, nullable=true) 
      */
     private $email;
+    
+    /**
+     * @ORM\Column(name="tipo", type="string", length=100, nullable=true) 
+     */
+    private $tipo;
+    
+    /**
+     * @ORM\Column(name="mdoiden", type="string", length=100, nullable=true) 
+     */
+    private $mdoiden;
+    
+    /**
+     * @ORM\Column(name="nivel", type="string", length=100, nullable=true) 
+     */
+    private $nivel;
+           
+	/**
+     * @ORM\Column(name="carriers", type="string", length=100, nullable=true) 
+     */
+    private $carriers;
+
+	/**
+     * @ORM\Column(name="masc", type="string", length=100, nullable=true) 
+     */
+    private $masc;
 
     /**
      * @ORM\Column(name="created_at", type="datetime")
      */
-    
+            
     private $createdAt;
 
     /**
@@ -457,7 +482,9 @@ class Sucursal
     public function addUsuario(\Backend\UserBundle\Entity\User $usuarios)
     {
         $this->usuarios[] = $usuarios;
+	}
 
+     /**
      * Add productos
      *
      * @param \Backend\AdminBundle\Entity\Producto $productos
@@ -489,18 +516,7 @@ class Sucursal
     {
         return $this->usuarios;
     }
-
-    /**
-     * Set centro
-     *
-     * @param \Backend\AdminBundle\Entity\Centro $centro
-     * @return Sucursal
-     */
-    public function setCentro(\Backend\AdminBundle\Entity\Centro $centro = null)
-    {
-        $this->centro = $centro;
-	}
-     
+        
      /*
      * Remove productos
      *
@@ -533,16 +549,7 @@ class Sucursal
  
         return $this;
     }
-
-    /**
-     * Get centro
-     *
-     * @return \Backend\AdminBundle\Entity\Centro 
-     */
-    public function getCentro()
-    {
-        return $this->centro;
-	}
+    
      /*
      * Remove canjes
      *
@@ -562,5 +569,120 @@ class Sucursal
     {
         return $this->canjes;
 
+    }
+
+    /**
+     * Set tipo
+     *
+     * @param string $tipo
+     * @return Sucursal
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+    
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return string 
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * Set mdoiden
+     *
+     * @param string $mdoiden
+     * @return Sucursal
+     */
+    public function setMdoiden($mdoiden)
+    {
+        $this->mdoiden = $mdoiden;
+    
+        return $this;
+    }
+
+    /**
+     * Get mdoiden
+     *
+     * @return string 
+     */
+    public function getMdoiden()
+    {
+        return $this->mdoiden;
+    }
+
+    /**
+     * Set nivel
+     *
+     * @param string $nivel
+     * @return Sucursal
+     */
+    public function setNivel($nivel)
+    {
+        $this->nivel = $nivel;
+    
+        return $this;
+    }
+
+    /**
+     * Get nivel
+     *
+     * @return string 
+     */
+    public function getNivel()
+    {
+        return $this->nivel;
+    }
+
+    /**
+     * Set carriers
+     *
+     * @param string $carriers
+     * @return Sucursal
+     */
+    public function setCarriers($carriers)
+    {
+        $this->carriers = $carriers;
+    
+        return $this;
+    }
+
+    /**
+     * Get carriers
+     *
+     * @return string 
+     */
+    public function getCarriers()
+    {
+        return $this->carriers;
+    }
+
+    /**
+     * Set masc
+     *
+     * @param string $masc
+     * @return Sucursal
+     */
+    public function setMasc($masc)
+    {
+        $this->masc = $masc;
+    
+        return $this;
+    }
+
+    /**
+     * Get masc
+     *
+     * @return string 
+     */
+    public function getMasc()
+    {
+        return $this->masc;
     }
 }
