@@ -47,6 +47,12 @@ class Canje
     private $imeiNuevo;
     
     /**
+     * @ORM\Column(name="motivo", type="string", length=200)
+     */
+     
+    private $motivo;
+    
+    /**
      * @ORM\Column(name="idNuevo", type="integer",nullable=true)
      */
      
@@ -327,4 +333,27 @@ class Canje
         return $this;
     }
 
+
+    /**
+     * Set motivo
+     *
+     * @param string $motivo
+     * @return Canje
+     */
+    public function setMotivo($motivo)
+    {
+        $this->motivo = $motivo;
+    
+        return $this;
+    }
+
+    /**
+     * Get motivo
+     *
+     * @return string 
+     */
+    public function getMotivo()
+    {
+        return $this->motivo;
+    }
 }

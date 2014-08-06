@@ -65,13 +65,15 @@ class CanjeType extends AbstractType
                 'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('u')
                         ->where('u.isDelete = :delete')
-                         ->setParameter('delete',false)
-                         ->orderBy('u.name', 'ASC');
+                        ->andWhere('u.isLegacy = true')
+                        ->setParameter('delete',false)
+                        ->orderBy('u.name', 'ASC');
                          
             },
                 'property'=>'name',
                 'multiple'=>false //un solo deposito por operario
             ))
+            ->add('motivo')
             ->add('idNuevo','hidden')
             
             ;         

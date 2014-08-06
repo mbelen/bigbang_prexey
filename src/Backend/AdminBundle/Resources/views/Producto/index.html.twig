@@ -38,7 +38,8 @@
     <tr>
     <th>Centro</th>
     <th>Sucursal</th>
-	<th>Modelo</th>
+    <th>Nombre Fabrica</th>
+	<th>Nombre Comercial</th>
 	<th>Imei</th>
     <th>MSN</th>
     <th>Origen</th>
@@ -52,6 +53,7 @@
      <tr>                
 				<td>{{ producto.sucursal.centro.nombre}}</td>
 				<td>{{ producto.sucursal.nombre}}</td>
+				<td>{{ producto.getModelo.getNameManufacture}}</td>
                 <td>{{ producto.getModelo.getName}}</td>     
                 <td>{{ producto.imei}}</td>
                 <td>{{ producto.msn}}</td>

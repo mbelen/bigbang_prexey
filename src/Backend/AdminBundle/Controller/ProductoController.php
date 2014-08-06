@@ -301,11 +301,13 @@ class ProductoController extends Controller
                          
                             
         $excelService->excelObj->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'Sucursal')
-                    ->setCellValue('B1', 'Modelo')
-                    ->setCellValue('C1', 'Imei')
-                    ->setCellValue('D1', 'MSN')
-                    ->setCellValue('E1', 'Disponible')
+                    ->setCellValue('A1', 'Centro')
+                    ->setCellValue('B1', 'Sucursal')
+                    ->setCellValue('C1', 'NombreFabrica')
+                    ->setCellValue('D1', 'NombreComercial')
+                    ->setCellValue('E1', 'Imei')
+                    ->setCellValue('F1', 'MSN')
+                    ->setCellValue('G1', 'Disponible')
                     ;
         
         $resultados=$query->getResult();
@@ -314,11 +316,14 @@ class ProductoController extends Controller
         {
          
            $excelService->excelObj->setActiveSheetIndex(0)
-                         ->setCellValue("A$i",$r->getSucursal())
-                         ->setCellValue("B$i",$r->getModelo())
-                         ->setCellValue("C$i",$r->getImei())
-                         ->setCellValue("D$i",$r->getMsn())
-                         ->setCellValue("E$i",$r->getIsAvailable())
+						
+						 ->setCellValue("A$i",$r->getSucursal()->getCentro()->getNombre())	
+                         ->setCellValue("B$i",$r->getSucursal()->getNombre())
+                         ->setCellValue("C$i",$r->getModelo()->getNameManufacture())
+                         ->setCellValue("D$i",$r->getModelo()->getName())
+                         ->setCellValue("E$i",$r->getImei())
+                         ->setCellValue("F$i",$r->getMsn())
+                         ->setCellValue("G$i",$r->getIsAvailableToString($r->getIsAvailable()))
                          ;
                 
                            

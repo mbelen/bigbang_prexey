@@ -12,7 +12,7 @@ $("#validar").click(function() {
             })
             .done(function(data){
                 if(!data.modelo){
-					$('#backend_adminbundle_imeiNuevo_errorloc').html("El imei no corresponde a un equipo cargado");					
+					$('#backend_adminbundle_imeiNuevo_errorloc').html("El imei no corresponde a un equipo disponible");					
                 }
                 else{
 					console.log(data.id);

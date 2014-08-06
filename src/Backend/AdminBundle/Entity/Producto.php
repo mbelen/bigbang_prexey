@@ -226,6 +226,28 @@ class Producto
     {
         return $this->isAvailable;
     }
+    
+    /**
+     * Get isAvailableToString
+     *
+     * @return String
+     */
+    public function getIsAvailableToString($isAvailable)
+    {
+        if($this->isAvailable){
+        
+			return "Disponible";
+    
+		}else{
+			
+			return "No disponible";
+		}
+    }
+    
+    
+    
+    
+    
 
     /**
      * Set sucursal

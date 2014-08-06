@@ -305,11 +305,15 @@ class CanjeController extends Controller
 			if(!$producto){
 				$data["modelo"]= false;
 			}else{
-				
-				$modelo = $producto->getModelo()->getName();
-				$data["modelo"]= $modelo;
-				$id = $producto->getId();
-				$data["id"]=$id;
+				if($producto->getisAvailable() == true){
+					$modelo = $producto->getModelo()->getName();
+					$data["modelo"]= $modelo;
+					$id = $producto->getId();
+					$data["id"]=$id;
+				}else{
+				 
+				  $data["disponible"] = false;				
+				}	
 			}
 			$response = new Response(json_encode($data));
 			$response->headers->set('Content-Type', 'application/json');
@@ -333,9 +337,12 @@ class CanjeController extends Controller
                          
                             
         $excelService->excelObj->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'Sucursal')
-                    ->setCellValue('B1', 'Fecha')
-                    ->setCellValue('C1', 'ImeiNuevo')
+                    ->setCellValue('A1','Origen')
+                    ->setCellValue('B1', 'Centro')
+                    ->setCellValue('C1', 'Sucursal')
+                    ->setCellValue('D1','Modelo')
+                    ->setCellValue('E1', 'ImeiNuevo')
+                    ->setCellValue('F1', 'MSN')
                     ;
         
         $resultados=$query->getResult();
@@ -344,10 +351,12 @@ class CanjeController extends Controller
         {
          
            $excelService->excelObj->setActiveSheetIndex(0)
-                         ->setCellValue("A$i",$r->getSucursal())
-                         ->setCellValue("D$i",$r->getCreatedAt())
-                         ->setCellValue("C$i",$r->getImeiNuevo())                         
-                         
+                         ->setCellValue("A$i",$r->getProductoNuevo()->getOrigen()->getName())
+                         ->setCellValue("B$i",$r->getSucursal()->getCentro()->getNombre())
+                         ->setCellValue("C$i",$r->getSucursal()->getNombre())
+                         ->setCellValue("D$i",$r->getProductoNuevo()->getModelo()->getNameManufacture())
+                         ->setCellValue("E$i",$r->getImeiNuevo())                         
+                         ->setCellValue("F$i",$r->getProductoNuevo()->getMsn())
                          ;
                 
                            
