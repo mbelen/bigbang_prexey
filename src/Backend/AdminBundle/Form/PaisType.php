@@ -4,10 +4,9 @@ namespace Backend\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProvinciaType extends AbstractType
+class PaisType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -16,15 +15,7 @@ class ProvinciaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('pais', 'entity',array(
-            'class'=>'BackendAdminBundle:Pais',
-            'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder("u")
-                         ->select("u")
-                         ->orderBy('u.name', 'ASC');
-                      
-            }));
+            ->add('name');
     }
     
     /**
@@ -33,7 +24,7 @@ class ProvinciaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Backend\AdminBundle\Entity\Provincia'
+            'data_class' => 'Backend\AdminBundle\Entity\Pais'
         ));
     }
 
@@ -42,6 +33,6 @@ class ProvinciaType extends AbstractType
      */
     public function getName()
     {
-        return 'backend_adminbundle_provincia';
+        return 'backend_adminbundle_pais';
     }
 }

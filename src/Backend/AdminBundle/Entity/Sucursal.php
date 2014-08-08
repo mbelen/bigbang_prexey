@@ -140,6 +140,16 @@ class Sucursal
 
     protected $canjes;     
 
+     /**
+     * @ORM\ManyToOne(targetEntity="\Backend\AdminBundle\Entity\Pais", inversedBy="sucursals")
+     * @ORM\JoinColumn(name="pais_id", referencedColumnName="id")
+     */
+    public $pais;
+     /**
+     * @ORM\ManyToOne(targetEntity="\Backend\AdminBundle\Entity\Provincia", inversedBy="sucursals")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id")
+     */
+    public $provincia;
     
     /**
      * Constructor
@@ -149,6 +159,7 @@ class Sucursal
 
         $this->usuarios = new ArrayCollection();
         $this->productos = new ArrayCollection();
+        $this->canjes = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->isDelete=false;       
     }
@@ -684,5 +695,51 @@ class Sucursal
     public function getMasc()
     {
         return $this->masc;
+    }
+
+    /**
+     * Set pais
+     *
+     * @param \Backend\AdminBundle\Entity\Pais $pais
+     * @return Sucursal
+     */
+    public function setPais(\Backend\AdminBundle\Entity\Pais $pais = null)
+    {
+        $this->pais = $pais;
+    
+        return $this;
+    }
+
+    /**
+     * Get pais
+     *
+     * @return \Backend\AdminBundle\Entity\Pais 
+     */
+    public function getPais()
+    {
+        return $this->pais;
+    }
+
+    /**
+     * Set provincia
+     *
+     * @param \Backend\AdminBundle\Entity\Provincia $provincia
+     * @return Sucursal
+     */
+    public function setProvincia(\Backend\AdminBundle\Entity\Provincia $provincia = null)
+    {
+        $this->provincia = $provincia;
+    
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return \Backend\AdminBundle\Entity\Provincia 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
     }
 }

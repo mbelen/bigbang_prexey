@@ -20,6 +20,11 @@ provincia_update:
     defaults: { _controller: "BackendAdminBundle:Provincia:update" }
     requirements: { _method: post|put }
 
+provincia_pais:
+    pattern:  /getProvinciaPais
+    defaults: { _controller: "BackendAdminBundle:Provincia:getProvinciaPais" }
+
+
 provincia_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "BackendAdminBundle:Provincia:delete" }

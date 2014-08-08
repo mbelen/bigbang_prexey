@@ -3,24 +3,24 @@
 {% block container %}
     
     
-        <h4>Listado de Provincias </h4>
+        <h4>Listado de Paises </h4>
 
 <div class="row-fluid">
   
   
-  <div class="span2">  {% if is_granted("ROLE_ADDPROVINCIA") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('provincia_new') }}" >Nueva Provincia</button> {% endif %} </div>
+  <div class="span2">  {% if is_granted("ROLE_ADDPAIS") %} <button class="btn btn-primary" type="button" id="new_button" data-url="{{ path('pais_new') }}" >Nuevo País</button> {% endif %} </div>
   
     <div class="span3">
      
     <form id="custom-search-form" class="form-search form-horizontal pull-right" action="#">
       <div class="input-append span12">
       <input type="text" class="search-query" name="search-query" id="search-query" placeholder="Buscar" value="{{ search }}">
-      <button type="button" id="search-button" class="btn" data-url="{{ path('provincia') }}" ><i class="icon-search"></i></button>
+      <button type="button" id="search-button" class="btn" data-url="{{ path('pais') }}" ><i class="icon-search"></i></button>
       </div>
       </form>
     </div>
      <div class="span2">
-          {% if is_granted("ROLE_VIEWPROVINCIA") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('provincia_exportar') }}" >Exportar </button> {% endif %}
+          {% if is_granted("ROLE_VIEWPAIS") %} <button class="btn btn-primary" type="button" id="exportar_button" data-url="{{ path('pais_exportar') }}" >Exportar </button> {% endif %}
     </div>
  </div>
     <div class="well">
@@ -28,22 +28,20 @@
     <thead>
     <tr>
     <th {% if pagination.isSorted('u.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nombre', 'u.name') }}</th>
-    <th>País</th>
     <th style="width: 36px;">Acciones</th>
     </tr>
     </thead>
     <tbody>
-     {% for provincia in pagination %}
+     {% for pais in pagination %}
      <tr>
-                <td>{{ provincia.name|capitalize }}</td>
-                <td>{{ provincia.getPais.getName|capitalize }}</td>
+                <td>{{ pais.name|capitalize }}</td>
                 <td>
-                {% if is_granted("ROLE_MODPROVINCIA") %}
-                <a href="{{ path('provincia_edit', { 'id': provincia.id }) }}"><i class="icon-pencil"></i></a>
+                {% if is_granted("ROLE_MODPAIS") %}
+                <a href="{{ path('pais_edit', { 'id': pais.id }) }}"><i class="icon-pencil"></i></a>
                 {% endif %}
-                 {% if is_granted("ROLE_DELPROVINCIA") %}
+                 {% if is_granted("ROLE_DELPAIS") %}
                 
-                <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ provincia.id }} ><i class="icon-remove"></i></a>
+                <a href="#myModal" role="button" class="confirm-delete" data-toggle="modal" data-id={{ pais.id }} ><i class="icon-remove"></i></a>
                 
                  {% endif %}
                 </td>
@@ -66,11 +64,11 @@
       <h3 id="myModalLabel">Confirmar Borrado</h3>
      </div>
      <div class="modal-body">
-       <p class="error-text">Esta seguro que desea borrar los datos de la provincia?</p>
+       <p class="error-text">Esta seguro que desea borrar los datos del país?</p>
      </div>
      <div class="modal-footer">
       <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-      <button class="btn btn-danger " data-id="0"  data-url="{{ path('provincia_delete', { 'id': 'id' }) }}">Borrar</button>
+      <button class="btn btn-danger " data-id="0"  data-url="{{ path('pais_delete', { 'id': 'id' }) }}">Borrar</button>
      </div>
     </div>
     
