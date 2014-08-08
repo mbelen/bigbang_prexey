@@ -17,7 +17,12 @@ backend_marca:
 backend_provincia:
     resource: "@BackendAdminBundle/Resources/config/routing/provincia.yml"
     prefix:   /provincia
+
+backend_pais:
+    resource: "@BackendAdminBundle/Resources/config/routing/pais.yml"
+    prefix:   /pais
     
+
 backend_zona:
     resource: "@BackendAdminBundle/Resources/config/routing/zona.yml"
     prefix:   /zona    

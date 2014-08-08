@@ -217,7 +217,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
         $this->addReference('del-provincia', $accesoAdmin29);
         
-        $accesoAdmin30= new Acceso();
+        /*$accesoAdmin30= new Acceso();
         $accesoAdmin30->setName('Nueva Zona');
         $accesoAdmin30->setAcceso('ROLE_ADDZONA');
         $manager->persist($accesoAdmin30);
@@ -243,7 +243,7 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $accesoAdmin33->setAcceso('ROLE_DELZONA');
         $manager->persist($accesoAdmin33);
         $manager->flush();
-        $this->addReference('del-zona', $accesoAdmin33);
+        $this->addReference('del-zona', $accesoAdmin33);*/
         
         /*$accesoAdmin34= new Acceso();
         $accesoAdmin34->setName('Nuevo Artículo');
@@ -412,6 +412,35 @@ class LoadAccesoData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($accesoAdmin57);
         $manager->flush();
         $this->addReference('del-canje', $accesoAdmin57);
+        
+        $accesoAdmin58= new Acceso();
+        $accesoAdmin58->setName('Nuevo País');
+        $accesoAdmin58->setAcceso('ROLE_ADDPAIS');
+        $manager->persist($accesoAdmin58);
+        $manager->flush();
+        $this->addReference('add-pais', $accesoAdmin58);
+        
+        $accesoAdmin59 = new Acceso();
+        $accesoAdmin59->setName('Listar Paises');
+        $accesoAdmin59->setAcceso('ROLE_VIEWPAIS');
+        $manager->persist($accesoAdmin59);
+        $manager->flush();
+        $this->addReference('view-pais', $accesoAdmin59);
+        
+        $accesoAdmin60 = new Acceso();
+        $accesoAdmin60->setName('Modificar País');
+        $accesoAdmin60->setAcceso('ROLE_MODPAIS');
+        $manager->persist($accesoAdmin60);
+        $manager->flush();
+        $this->addReference('mod-pais', $accesoAdmin60);
+        
+        $accesoAdmin61 = new Acceso();
+        $accesoAdmin61->setName('Borrar País');
+        $accesoAdmin61->setAcceso('ROLE_DELPAIS');
+        $manager->persist($accesoAdmin61);
+        $manager->flush();
+        $this->addReference('del-pais', $accesoAdmin61);
+        
         
                 
     }

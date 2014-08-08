@@ -7,7 +7,7 @@
                     {% endif %}
                     
                     {% if  is_granted('ROLE_SETEO') or is_granted('ROLE_ADMIN') or
-                    is_granted('ROLE_VIEWPROVINCIA') or is_granted('ROLE_VIEWZONA') 
+                    is_granted('ROLE_VIEWPROVINCIA') or is_granted('ROLE_VIEWPAIS') 
                      %}
                     <li class="dropdown">           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuración<b class="caret"></b></a>
                       <ul class="dropdown-menu">
@@ -22,9 +22,9 @@
                             <li class="divider"></li>
                             <li><a href="{{ path('provincia') }}">Provincias</a></li>
                         {% endif %}
-                        {% if is_granted('ROLE_VIEWZONA') %}
+                        {% if is_granted('ROLE_VIEWPAIS') %}
                             <li class="divider"></li>
-                            <li><a href="{{ path('zona') }}">Zonas</a></li>
+                            <li><a href="{{ path('pais') }}">Paises</a></li>
                         {% endif %}                                                
                       </ul>
                     </li>
