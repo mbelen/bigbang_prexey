@@ -1,4 +1,39 @@
+function limpiarSelect(idselect) {
+    $('#' + idselect + ' option').each(function(index, option) {
+        if (index !== '' && index !== 0) {
+            $(option).remove();
+        }
+    });
+}
+
 $(document).ready(function() {
+
+$("#backend_adminbundle_sucursal_pais").change(function() {
+    var option = $("#backend_adminbundle_sucursal_pais option:selected").val();
+    //eliminar todas las opciones de la zona
+    limpiarSelect("backend_adminbundle_sucursal_provincia");
+  
+    if (option !== '')
+    {
+        var dataString = 'pais=' + option;
+        var path = $(this).data('url');
+        $.ajax({
+            type: "POST",
+            url: path,
+            dataType: 'json',
+            data: dataString,
+            success: function(data) {
+                $.each(data, function(i) {
+                    $('#backend_adminbundle_sucursal_provincia')
+                            .append($('<option>', {value: data[i].id})
+                            .text(data[i].name));
+                });
+            }
+        });
+    }
+});
+
+
 		var validator = $("#tab").validate({
 		
 			rules: {

@@ -3,22 +3,21 @@
 namespace Backend\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Backend\AdminBundle\Entity\Provincia;
-use Backend\AdminBundle\Form\ProvinciaType;
+use Backend\AdminBundle\Entity\Pais;
+use Backend\AdminBundle\Form\PaisType;
 
 /**
  * Provincia controller.
  *
  */
-class ProvinciaController extends Controller
+class PaisController extends Controller
 {
 
      public function generateSQL($search){
      
-        $dql="SELECT u FROM BackendAdminBundle:Provincia u "  ;
+        $dql="SELECT u FROM BackendAdminBundle:Pais u "  ;
         $search=mb_convert_case($search,MB_CASE_LOWER);
         
        
@@ -37,7 +36,7 @@ class ProvinciaController extends Controller
      */
     public function indexAction(Request $request,$search)
     {
-       if ( $this->get('security.context')->isGranted('ROLE_VIEWPROVINCIA')) {
+       if ( $this->get('security.context')->isGranted('ROLE_VIEWPAIS')) {
         $em = $this->getDoctrine()->getManager();
         
         $dql=$this->generateSQL($search);
@@ -51,7 +50,7 @@ class ProvinciaController extends Controller
     );
         
         $deleteForm = $this->createDeleteForm(0);
-        return $this->render('BackendAdminBundle:Provincia:index.html.twig', 
+        return $this->render('BackendAdminBundle:Pais:index.html.twig', 
         array('pagination' => $pagination,
         'delete_form' => $deleteForm->createView(),
         'search'=>$search
@@ -67,22 +66,22 @@ class ProvinciaController extends Controller
      */
     public function createAction(Request $request)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_ADDPROVINCIA')) {
-        $entity  = new Provincia();
-        $form = $this->createForm(new ProvinciaType(), $entity);
+        if ( $this->get('security.context')->isGranted('ROLE_ADDPAIS')) {
+        $entity  = new Pais();
+        $form = $this->createForm(new PaisType(), $entity);
         $form->bind($request);
          
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success' , 'Se ha agregado una nueva provincia.');
-            return $this->redirect($this->generateUrl('provincia_edit', array('id' => $entity->getId())));
+            $this->get('session')->getFlashBag()->add('success' , 'Se ha agregado un nuevo país.');
+            return $this->redirect($this->generateUrl('pais_edit', array('id' => $entity->getId())));
         }
         
         
 
-        return $this->render('BackendAdminBundle:Provincia:new.html.twig', array(
+        return $this->render('BackendAdminBundle:Pais:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
            
@@ -99,10 +98,10 @@ class ProvinciaController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Provincia $entity)
+    private function createCreateForm(Pais $entity)
     {
-        $form = $this->createForm(new ProvinciaType(), $entity, array(
-            'action' => $this->generateUrl('provincia_create'),
+        $form = $this->createForm(new PaisType(), $entity, array(
+            'action' => $this->generateUrl('pais_create'),
             'method' => 'POST',
         ));
 
@@ -117,11 +116,11 @@ class ProvinciaController extends Controller
      */
     public function newAction()
     {
-       if ( $this->get('security.context')->isGranted('ROLE_ADDPROVINCIA')) {
-        $entity = new Provincia();
-        $form   = $this->createForm(new ProvinciaType(), $entity);
+       if ( $this->get('security.context')->isGranted('ROLE_ADDPAIS')) {
+        $entity = new Pais();
+        $form   = $this->createForm(new PaisType(), $entity);
 
-        return $this->render('BackendAdminBundle:Provincia:new.html.twig', array(
+        return $this->render('BackendAdminBundle:Pais:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
             
@@ -138,21 +137,21 @@ class ProvinciaController extends Controller
      */
     public function editAction($id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODPROVINCIA')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_MODPAIS')) { 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendAdminBundle:Provincia')->find($id);
+        $entity = $em->getRepository('BackendAdminBundle:Pais')->find($id);
 
         if (!$entity) {
             
-             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado la provincia .');
-             return $this->redirect($this->generateUrl('provincia'));
+             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el país .');
+             return $this->redirect($this->generateUrl('pais'));
         }
 
-        $editForm = $this->createForm(new ProvinciaType(), $entity);
+        $editForm = $this->createForm(new PaisType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('BackendAdminBundle:Provincia:edit.html.twig', array(
+        return $this->render('BackendAdminBundle:Pais:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -170,10 +169,10 @@ class ProvinciaController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Provincia $entity)
+    private function createEditForm(Pais $entity)
     {
-        $form = $this->createForm(new ProvinciaType(), $entity, array(
-            'action' => $this->generateUrl('provincia_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PaisType(), $entity, array(
+            'action' => $this->generateUrl('pais_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -187,28 +186,28 @@ class ProvinciaController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_MODPROVINCIA')) {  
+        if ( $this->get('security.context')->isGranted('ROLE_MODPAIS')) {  
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendAdminBundle:Provincia')->find($id);
+        $entity = $em->getRepository('BackendAdminBundle:Pais')->find($id);
 
         if (!$entity) {
-             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado la provincia.');
-             return $this->redirect($this->generateUrl('provincia'));
+             $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el país.');
+             return $this->redirect($this->generateUrl('pais'));
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createForm(new ProvinciaType(), $entity);
+        $editForm = $this->createForm(new PaisType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-             $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos de la provincia .');
-            return $this->redirect($this->generateUrl('provincia_edit', array('id' => $id)));
+             $this->get('session')->getFlashBag()->add('success' , 'Se han actualizado los datos del país .');
+            return $this->redirect($this->generateUrl('pais_edit', array('id' => $id)));
         }
 
-        return $this->render('BackendAdminBundle:Provincia:edit.html.twig', array(
+        return $this->render('BackendAdminBundle:Pais:edit.html.twig', array(
             'entity'      => $entity,
             'form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -224,16 +223,16 @@ class ProvinciaController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        if ( $this->get('security.context')->isGranted('ROLE_DELPROVINCIA')) { 
+        if ( $this->get('security.context')->isGranted('ROLE_DELPAIS')) { 
         $form = $this->createDeleteForm($id);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BackendAdminBundle:Provincia')->find($id);
+            $entity = $em->getRepository('BackendAdminBundle:Pais')->find($id);
 
             if (!$entity) {
-                $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado la provincia.');
+                $this->get('session')->getFlashBag()->add('error' , 'No se ha encontrado el país.');
              
             }
            else{
@@ -242,12 +241,12 @@ class ProvinciaController extends Controller
             
             $em->remove($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success' , 'Se han borrado los datos de la provincia.');
+            $this->get('session')->getFlashBag()->add('success' , 'Se han borrado los datos del país.');
             
             }
         }
 
-        return $this->redirect($this->generateUrl('provincia'));
+        return $this->redirect($this->generateUrl('pais'));
       }
       else
        throw new AccessDeniedException(); 
@@ -268,29 +267,9 @@ class ProvinciaController extends Controller
         ;
     }
     
-    public function getProvinciaPaisAction(Request $request)
-    {
-     $pais_id=$request->request->get("pais");
-     $provincias = $this->getDoctrine()->getRepository('BackendAdminBundle:Provincia')->findBy(array("pais"=>$pais_id));
-     
-      $resultado=array();
-     foreach($provincias as $v){
-          $r=array();
-          $r["id"]=$v->getId();
-          $r["name"]=$v->getName();
-          $resultado[] = $r;
-     
-     }
-     $response = new Response(json_encode($resultado));
-      
-      $response->headers->set('Content-Type', 'application/json');
-
-      return $response;
-    }
-    
      public function exportarAction(Request $request)
     {
-     if ( $this->get('security.context')->isGranted('ROLE_VIEWPROVINCIA')) {
+     if ( $this->get('security.context')->isGranted('ROLE_VIEWPAIS')) {
          
          $em = $this->getDoctrine()->getManager();
 
@@ -317,12 +296,12 @@ class ProvinciaController extends Controller
           $i++;
         }
                             
-        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Provincias');
+        $excelService->excelObj->getActiveSheet()->setTitle('Listado de Paises');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $excelService->excelObj->setActiveSheetIndex(0);
         $excelService->excelObj->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
         
-        $fileName="provincias_".date("Ymd").".xls";
+        $fileName="paises_".date("Ymd").".xls";
         //create the response
         $response = $excelService->getResponse();
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');

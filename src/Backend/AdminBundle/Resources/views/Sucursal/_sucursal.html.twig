@@ -148,3 +148,23 @@
 </div>
 </div>
 
+<div class="control-group">
+
+{{ form_label(form.pais,"País", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.pais, { 'attr': {'class': 'input-xlarge', 'data-url':  path ('provincia_pais')} }) }}
+ <div id='backend_adminbundle_sucursal_pais_errorloc' class="help-inline error" >{{ form_errors(form.pais) }}</div>
+  
+</div>
+</div>
+
+<div class="control-group">
+
+{{ form_label(form.provincia,"Provincia", { 'label_attr': {'class': 'control-label'} }) }}
+<div class="controls">
+ {{ form_widget(form.provincia, { 'attr': {'class': 'input-xlarge'} }) }}
+ <div id='backend_adminbundle_sucursal_provincia_errorloc' class="help-inline error" >{{ form_errors(form.provincia) }}</div>
+  
+</div>
+</div>
+
