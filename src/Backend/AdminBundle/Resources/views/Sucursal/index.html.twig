@@ -34,9 +34,10 @@
     <thead>
     <tr>
     
-    <th {% if pagination.isSorted('u.nombre') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nombre', 'u.nombre') }}</th>
+    <th {% if pagination.isSorted('u.id') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nombre', 'u.id') }}</th>
     <th>Responsable</th>
     <th>Dirección</th>
+    <th>Zona</th>
     <th>Teléfono</th>
     <th>Fax</th>
     <th>Email</th>
@@ -50,9 +51,10 @@
     
      <tr>
                 
-                <td>{{ sucursal.nombre|capitalize }}</td>
+                <td>{{ sucursal.nombre }}</td>
                 <td>{{ sucursal.Responsable|capitalize }}</td>
                 <td>{{ sucursal.calle~" "~sucursal.numero}}</td>
+                <td>{{ sucursal.zona.getName }}</td>
                 <td>{{ sucursal.telefono }}</td>
                 <td>{{ sucursal.fax }}</td>
                 <td>{{ sucursal.email }} </td>

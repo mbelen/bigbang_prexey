@@ -151,6 +151,12 @@ class Sucursal
      */
     public $provincia;
     
+     /**
+     * @ORM\ManyToOne(targetEntity="\Backend\AdminBundle\Entity\Zona", inversedBy="sucursals")
+     * @ORM\JoinColumn(name="zona_id", referencedColumnName="id")
+     */
+    public $zona;
+    
     /**
      * Constructor
      */
@@ -741,5 +747,28 @@ class Sucursal
     public function getProvincia()
     {
         return $this->provincia;
+    }
+
+    /**
+     * Set zona
+     *
+     * @param \Backend\AdminBundle\Entity\Zona $zona
+     * @return Sucursal
+     */
+    public function setZona(\Backend\AdminBundle\Entity\Zona $zona = null)
+    {
+        $this->zona = $zona;
+    
+        return $this;
+    }
+
+    /**
+     * Get zona
+     *
+     * @return \Backend\AdminBundle\Entity\Zona 
+     */
+    public function getZona()
+    {
+        return $this->zona;
     }
 }

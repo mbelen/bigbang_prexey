@@ -31,12 +31,19 @@ class Zona
      */
 
     protected $provincia;    
-
-   
-   
-
-  
-
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Sucursal", mappedBy="zona")
+     */
+    
+    protected $sucursales; 
+    
+     /**
+     * @ORM\Column(name="is_delete", type="boolean" )
+     */
+    
+    private $isDelete; 
+    
     /**
      * Get id
      *
@@ -91,5 +98,69 @@ class Zona
     public function getProvincia()
     {
         return $this->provincia;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sucursales = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isDelete=false; 
+    }
+    
+    /**
+     * Add sucursales
+     *
+     * @param \Backend\AdminBundle\Entity\Sucursal $sucursales
+     * @return Zona
+     */
+    public function addSucursale(\Backend\AdminBundle\Entity\Sucursal $sucursales)
+    {
+        $this->sucursales[] = $sucursales;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sucursales
+     *
+     * @param \Backend\AdminBundle\Entity\Sucursal $sucursales
+     */
+    public function removeSucursale(\Backend\AdminBundle\Entity\Sucursal $sucursales)
+    {
+        $this->sucursales->removeElement($sucursales);
+    }
+
+    /**
+     * Get sucursales
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSucursales()
+    {
+        return $this->sucursales;
+    }
+
+    /**
+     * Set isDelete
+     *
+     * @param boolean $isDelete
+     * @return Zona
+     */
+    public function setIsDelete($isDelete)
+    {
+        $this->isDelete = $isDelete;
+    
+        return $this;
+    }
+
+    /**
+     * Get isDelete
+     *
+     * @return boolean 
+     */
+    public function getIsDelete()
+    {
+        return $this->isDelete;
     }
 }

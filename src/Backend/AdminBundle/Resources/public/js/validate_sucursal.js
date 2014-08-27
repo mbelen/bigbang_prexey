@@ -59,8 +59,8 @@ $("#backend_adminbundle_sucursal_pais").change(function() {
 					number: true,
 				},
 				"backend_adminbundle_sucursal[piso]": {
-					required:true,
-          minlength:1,
+					required:false,
+					minlength:1,
 					maxlength:3,					
 				},
 				"backend_adminbundle_sucursal[cp]": {

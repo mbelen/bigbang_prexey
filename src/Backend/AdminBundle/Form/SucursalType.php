@@ -64,15 +64,31 @@ class SucursalType extends AbstractType
             },
                 'property'=>'nombre',
                 'multiple'=>false, //un solo deposito por operario
-            ));
+            ))//;
             
-        ;
+        //;
+        
+        ->add('zona','entity',array(
+                'class'=>'BackendAdminBundle:Zona',
+                'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                        ->where('u.isDelete = :delete')
+                        ->setParameter('delete',false)
+                        ->orderBy('u.name', 'ASC');
+                         
+            },
+                'property'=>'name',
+                'multiple'=>false //un solo deposito por operario
+            ));
         
         $paisSubscriber = new PaisSubscriber($builder->getFormFactory());
         $builder->addEventSubscriber($paisSubscriber);
         
         $provinciaSubscriber = new ProvinciaSubscriber($builder->getFormFactory());
         $builder->addEventSubscriber($provinciaSubscriber);
+        
+         
+        
         
     }
     
